@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="HMS-SDK-2.4.0.300:@aar">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/seal/build/intermediates/exploded-aar/HMS-SDK-2.4.0.300/res" />
+      <root url="jar://$PROJECT_DIR$/seal/build/intermediates/exploded-aar/HMS-SDK-2.4.0.300/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
