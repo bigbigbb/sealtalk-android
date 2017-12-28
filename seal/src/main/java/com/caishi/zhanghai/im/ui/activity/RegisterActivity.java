@@ -3,9 +3,11 @@ package com.caishi.zhanghai.im.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,6 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.caishi.zhanghai.im.R;
+import com.caishi.zhanghai.im.bean.GetCodeBean;
+import com.caishi.zhanghai.im.bean.GetCodeReturnBean;
+import com.caishi.zhanghai.im.bean.LoginReturnBean;
+import com.caishi.zhanghai.im.bean.SetPassBean;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.network.http.HttpException;
 import com.caishi.zhanghai.im.server.response.CheckPhoneResponse;
 import com.caishi.zhanghai.im.server.response.RegisterResponse;
@@ -26,6 +34,7 @@ import com.caishi.zhanghai.im.server.utils.downtime.DownTimer;
 import com.caishi.zhanghai.im.server.utils.downtime.DownTimerListener;
 import com.caishi.zhanghai.im.server.widget.ClearWriteEditText;
 import com.caishi.zhanghai.im.server.widget.LoadDialog;
+import com.google.gson.Gson;
 
 /**
  * Created by AMing on 16/1/14.
@@ -62,7 +71,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mConfirm = (Button) findViewById(R.id.reg_button);
 
         mGetCode.setOnClickListener(this);
-        mGetCode.setClickable(false);
+        //按照我们暂时的需求改成true
+        mGetCode.setClickable(true);
         mConfirm.setOnClickListener(this);
 
         TextView goLogin = (TextView) findViewById(R.id.reg_login);
@@ -95,7 +105,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 if (s.length() == 11 && isBright) {
                     if (AMUtils.isMobile(s.toString().trim())) {
                         mPhone = s.toString().trim();
-                        request(CHECK_PHONE, true);
+                        //暂时去掉   本来是融云用来调用自己后台的接口来判断输入的手机号是否可用
+                        //加上设置true
+                        mGetCode.setClickable(true);
+//                        request(CHECK_PHONE, true);
                         AMUtils.onInactive(mContext, mPhoneEdit);
                     } else {
                         Toast.makeText(mContext, R.string.Illegal_phone_number, Toast.LENGTH_SHORT).show();
@@ -289,10 +302,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     NToast.longToast(mContext, R.string.phone_number_is_null);
                 } else {
                     isRequestCode = true;
-                    DownTimer downTimer = new DownTimer();
-                    downTimer.setListener(this);
-                    downTimer.startDown(60 * 1000);
-                    request(SEND_CODE);
+
+//                    request(SEND_CODE);
+                    getCode(mPhone);
                 }
                 break;
             case R.id.reg_button:
@@ -340,12 +352,112 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 }
 
                 LoadDialog.show(mContext);
-                request(VERIFY_CODE, true);
+                //取消调用他们后台的接口  改用自己后台的接口
+//                request(VERIFY_CODE, true);
+                confirmRegister(mPhone,mPassword,mCode,mNickName);
 
                 break;
         }
     }
 
+    private void confirmRegister(String mobile, String password, String code,String name) {
+        SetPassBean setPassBean = new SetPassBean();
+        setPassBean.setM("member");
+        setPassBean.setK("reg_mobile");
+        setPassBean.setRid(String.valueOf(System.currentTimeMillis()));
+        SetPassBean.VBean vBean = new SetPassBean.VBean();
+        vBean.setMobile(mobile);
+        vBean.setPassword(password);
+        vBean.setName(name);
+        vBean.setSms_code(code);
+        setPassBean.setV(vBean);
+        final String msg = new Gson().toJson(setPassBean);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SocketClient.getInstance().sendMsg(msg, new CallBackJson() {
+                    @Override
+                    public void returnJson(String json) {
+                        Log.e("test", "json" + json);
+                        LoginReturnBean setPassReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
+                        Message message = new Message();
+                        message.obj = setPassReturnBean;
+                        handlerComplete.sendMessage(message);
+
+
+                    }
+                });
+
+            }
+        }).start();
+
+    }
+
+    private Handler handlerComplete = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            LoginReturnBean setPassReturnBean = (LoginReturnBean) msg.obj;
+            Toast.makeText(getApplication(), setPassReturnBean.getDesc(), Toast.LENGTH_LONG).show();
+            if (setPassReturnBean.getV().equals("ok")) {
+                LoadDialog.dismiss(mContext);
+                NToast.shortToast(mContext, R.string.register_success);
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                intent.putExtra("phone", mPhone);
+                intent.putExtra("password", mPassword);
+                intent.putExtra("nickname", mNickName);
+//                data.putExtra("id", rres.getResult().getId());
+                setResult(REGISTER_BACK, intent);
+                finish();
+            }
+        }
+    };
+
+    /**
+     * 获取注册的验证码
+     * @param phone
+     */
+    private void getCode(String phone) {
+        final GetCodeBean getCodeBean = new GetCodeBean();
+        getCodeBean.setM("common");
+        getCodeBean.setK("get_smscode_reg");
+        getCodeBean.setRid(String.valueOf(System.currentTimeMillis()));
+        GetCodeBean.VBean vBean = new GetCodeBean.VBean();
+        vBean.setMobile(phone);
+        getCodeBean.setV(vBean);
+        final String json = new Gson().toJson(getCodeBean);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SocketClient.getInstance().sendMsg(json, new CallBackJson() {
+                    @Override
+                    public void returnJson(String json) {
+                        Log.e("test", "json" + json);
+                        GetCodeReturnBean getCodeReturnBean = new Gson().fromJson(json, GetCodeReturnBean.class);
+                        Message message = new Message();
+                        message.obj = getCodeReturnBean;
+                        handler.sendMessage(message);
+
+                    }
+                });
+            }
+        }).start();
+
+    }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            GetCodeReturnBean getCodeReturnBean = (GetCodeReturnBean) msg.obj;
+            Toast.makeText(getApplication(), getCodeReturnBean.getDesc(), Toast.LENGTH_LONG).show();
+            if (getCodeReturnBean.getV().equals("ok")) {
+                DownTimer downTimer = new DownTimer();
+                downTimer.setListener(RegisterActivity.this);
+                downTimer.startDown(60 * 1000);
+            }
+        }
+    };
     boolean isBright = true;
 
     @Override

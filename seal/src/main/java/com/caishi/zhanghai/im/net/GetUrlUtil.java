@@ -3,7 +3,7 @@ package com.caishi.zhanghai.im.net;
 import android.util.Log;
 
 import com.caishi.zhanghai.im.bean.GetUrlBean;
-import com.caishi.zhanghai.im.server.utils.MD5;
+import com.caishi.zhanghai.im.utils.MD5;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -22,7 +22,7 @@ import static android.content.ContentValues.TAG;
 public class GetUrlUtil {
     public static void requestGet() {
         try {
-            String md5Value = MD5.encrypt("chat_Android_ZhanghaiAPP4AndroidPass");
+            String md5Value = MD5.getStringMD5("chat_Android_ZhanghaiAPP4AndroidPass");
             String requestUrl = " http://www.looklaw.cn/chat/hello?iam=Android-" + md5Value;
 //            String requestUrl = baseUrl + tempParams.toString();
             // 新建一个URL对象

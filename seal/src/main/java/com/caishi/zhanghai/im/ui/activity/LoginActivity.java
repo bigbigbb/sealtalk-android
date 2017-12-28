@@ -183,6 +183,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             String id = data.getStringExtra("id");
             String nickname = data.getStringExtra("nickname");
             if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(id) && !TextUtils.isEmpty(nickname)) {
+//            if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(password) &&  !TextUtils.isEmpty(nickname)) {
                 mPhoneEdit.setText(phone);
                 mPasswordEdit.setText(password);
                 editor.putString(SealConst.SEALTALK_LOGING_PHONE, phone);

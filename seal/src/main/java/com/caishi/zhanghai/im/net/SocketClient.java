@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.caishi.zhanghai.im.bean.AuthBean;
 import com.caishi.zhanghai.im.bean.HeartBean;
-import com.caishi.zhanghai.im.server.utils.MD5;
+import com.caishi.zhanghai.im.utils.MD5;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class SocketClient{
         authBean.setK("auth");
         authBean.setRid(time);
         authBean.setM("system");
-        String v = "Android-"+ MD5.encrypt("Android|ZhanghaiAPP4AndroidPass|1.0.0")+"-1.0.0";
+        String v = "Android-"+ MD5.getStringMD5("Android|ZhanghaiAPP4AndroidPass|1.0.0")+"-1.0.0";
         authBean.setV(v);
         sendMsg(new Gson().toJson(authBean));
 

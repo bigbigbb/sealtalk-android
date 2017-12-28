@@ -6,11 +6,12 @@ package com.caishi.zhanghai.im.bean;
 
 public class SetPassBean {
 
+
     /**
      * rid : xxx
      * m : member
      * k : reg_mobile
-     * v : {"mobile":"13127655805","sms_code":"1234","password":"123456"}
+     * v : {"name":"付小涛","mobile":"13127655805","sms_code":"1234","password":"123456"}
      */
 
     private String rid;
@@ -52,14 +53,24 @@ public class SetPassBean {
 
     public static class VBean {
         /**
+         * name : 付小涛
          * mobile : 13127655805
          * sms_code : 1234
          * password : 123456
          */
 
+        private String name;
         private String mobile;
         private String sms_code;
         private String password;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
 
         public String getMobile() {
             return mobile;

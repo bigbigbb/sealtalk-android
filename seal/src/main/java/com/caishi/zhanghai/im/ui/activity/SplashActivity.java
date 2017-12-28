@@ -7,11 +7,16 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.Window;
 
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealAppContext;
+import com.caishi.zhanghai.im.net.AppParm;
+import com.caishi.zhanghai.im.net.GetUrlUtil;
+import com.caishi.zhanghai.im.net.SocketClient;
+
 import io.rong.imkit.RongIM;
 
 /**
@@ -22,6 +27,7 @@ public class SplashActivity extends Activity {
 
     private Context context;
     private android.os.Handler handler = new android.os.Handler();
+    private SocketClient mSocketClient;
 
 
     @Override
@@ -48,8 +54,29 @@ public class SplashActivity extends Activity {
                 }
             }, 800);
         }
+
+        initSocketNet();
     }
 
+
+    private void  initSocketNet(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GetUrlUtil.requestGet();
+                Looper.prepare();
+                if(null!= AppParm.IP&&null!=AppParm.PORT){
+                    mSocketClient = SocketClient.getInstance();
+                    mSocketClient.initSocket();
+                }
+                Looper.loop();
+            }
+        }).start();
+
+
+
+
+    }
 
     private void goToMain() {
         startActivity(new Intent(context, MainActivity.class));

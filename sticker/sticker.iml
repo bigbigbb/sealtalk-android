@@ -84,10 +84,8 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
@@ -98,8 +96,8 @@
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="com.android.support:support-annotations:23.4.0@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\sealtalk-android\sticker\libs\BQMMRongCloudPlugin-v1.0.6.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-v4-23.4.0" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\sticker\libs\BQMMRongCloudPlugin-v1.0.6.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="org.apache.http.legacy-android-23" level="project" />
   </component>
 </module>
