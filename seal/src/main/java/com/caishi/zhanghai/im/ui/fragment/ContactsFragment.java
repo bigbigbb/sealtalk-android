@@ -289,7 +289,10 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
         }
 
         // 根据a-z进行排序源数据
-        Collections.sort(mFriendList, mPinyinComparator);
+        if(null!=mFriendList){
+            Collections.sort(mFriendList, mPinyinComparator);
+        }
+
         if (isReloadList) {
             mSidBar.setVisibility(View.VISIBLE);
             mFriendListAdapter.updateListView(mFriendList);

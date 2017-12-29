@@ -96,6 +96,14 @@ public class SocketClient{
 
     }
 
+    public void sendMessage(final String msg, final CallBackJson classBack){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sendMsg(msg,classBack);
+            }
+        }).start();
+    }
     public void sendMsg(String msg) {
         mClassBack = null;
         if (null != mSocket && null != mSocket.get()) {

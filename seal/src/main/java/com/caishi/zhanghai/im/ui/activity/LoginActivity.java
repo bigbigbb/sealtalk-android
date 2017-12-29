@@ -1,11 +1,13 @@
 package com.caishi.zhanghai.im.ui.activity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -17,10 +19,17 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealConst;
 import com.caishi.zhanghai.im.SealUserInfoManager;
+import com.caishi.zhanghai.im.bean.GetUserInfoBean;
+import com.caishi.zhanghai.im.bean.GetUserInfoReturnBean;
+import com.caishi.zhanghai.im.bean.LoginBean;
+import com.caishi.zhanghai.im.bean.LoginReturnBean;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.network.http.HttpException;
 import com.caishi.zhanghai.im.server.response.GetTokenResponse;
 import com.caishi.zhanghai.im.server.response.GetUserInfoByIdResponse;
@@ -32,6 +41,10 @@ import com.caishi.zhanghai.im.server.utils.NToast;
 import com.caishi.zhanghai.im.server.utils.RongGenerate;
 import com.caishi.zhanghai.im.server.widget.ClearWriteEditText;
 import com.caishi.zhanghai.im.server.widget.LoadDialog;
+import com.caishi.zhanghai.im.utils.MD5;
+import com.google.gson.Gson;
+import com.huawei.hms.support.api.entity.hwid.GetLoginInfoResult;
+
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.UserInfo;
@@ -158,7 +171,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 editor.putBoolean("exit", false);
                 editor.apply();
                 String oldPhone = sp.getString(SealConst.SEALTALK_LOGING_PHONE, "");
-                request(LOGIN, true);
+//                request(LOGIN, true);
+                login(phoneString, passwordString);
                 break;
             case R.id.de_login_register:
                 startActivityForResult(new Intent(this, RegisterActivity.class), 1);
@@ -169,6 +183,120 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
+
+    private void syncUserInfo(){
+        GetUserInfoBean getUserInfoBean = new GetUserInfoBean();
+        getUserInfoBean.setK("user_info");
+        getUserInfoBean.setM("member");
+        getUserInfoBean.setRid(String.valueOf(System.currentTimeMillis()));
+        String  msg = new Gson().toJson(getUserInfoBean);
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
+            @Override
+            public void returnJson(String json) {
+                GetUserInfoReturnBean getUserInfoReturnBean = new Gson().fromJson(json,GetUserInfoReturnBean.class);
+                Message message = new Message();
+                message.obj = getUserInfoReturnBean;
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+        });
+
+    }
+
+
+
+    private void login(final String mobile, final String pwd) {
+
+        LoginBean loginBean = new LoginBean();
+        LoginBean.VBean vBean = new LoginBean.VBean();
+        vBean.setPassword(MD5.getStringMD5(pwd));
+        vBean.setMobile(mobile);
+        loginBean.setV(vBean);
+        loginBean.setM("member");
+        loginBean.setK("login_pass");
+        loginBean.setRid(String.valueOf(System.currentTimeMillis()));
+        final String msg = new Gson().toJson(loginBean);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SocketClient.getInstance().sendMsg(msg, new CallBackJson() {
+                    @Override
+                    public void returnJson(String json) {
+                        Log.e("test", "json" + json);
+                        LoginReturnBean loginReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
+                        Message message = new Message();
+                        message.obj = loginReturnBean;
+                        message.what =0;
+                        handler.sendMessage(message);
+
+
+                    }
+                });
+            }
+        }).start();
+
+    }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    LoginReturnBean loginReturnBean = (LoginReturnBean) msg.obj;
+                    Toast.makeText(getApplication(), loginReturnBean.getDesc(), Toast.LENGTH_LONG).show();
+                    if (loginReturnBean.getV().equals("ok")) {
+                        if (null != loginReturnBean.getData()) {
+                            loginToken = loginReturnBean.getData().getToken();
+                            if (!TextUtils.isEmpty(loginToken)) {
+                                RongIM.connect(loginToken, new RongIMClient.ConnectCallback() {
+                                    @Override
+                                    public void onTokenIncorrect() {
+                                        NLog.e("connect", "onTokenIncorrect");
+//                                    reGetToken();
+
+                                    }
+
+                                    @Override
+                                    public void onSuccess(String s) {
+                                        connectResultId = s;
+                                        NLog.e("connect", "onSuccess userid:" + s);
+                                        editor.putString(SealConst.SEALTALK_LOGIN_ID, s);
+                                        editor.apply();
+                                        SealUserInfoManager.getInstance().openDB();
+                                        syncUserInfo();
+                                    }
+
+                                    @Override
+                                    public void onError(RongIMClient.ErrorCode errorCode) {
+                                        NLog.e("connect", "onError errorcode:" + errorCode.getValue());
+                                    }
+                                });
+                            }
+
+                        }
+                    }
+                    break;
+                case 1:
+                    GetUserInfoReturnBean getUserInfoReturnBean = (GetUserInfoReturnBean) msg.obj;
+                    GetUserInfoReturnBean.DataBean dataBean = getUserInfoReturnBean.getData();
+                    if(null!=dataBean){
+                        String  nickName = dataBean.getNickname();
+                        String  portraitUri = dataBean.getPortraitUri();
+                        editor.putString(SealConst.SEALTALK_LOGIN_NAME, nickName);
+                        editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, portraitUri);
+                        editor.apply();
+                        RongIM.getInstance().refreshUserInfoCache(new UserInfo(connectResultId, nickName, Uri.parse(portraitUri)));
+                    }
+                    //不继续在login界面同步好友,群组,群组成员信息
+                    SealUserInfoManager.getInstance().getAllUserInfo();
+                    goToMain();
+                    break;
+            }
+
+
+            }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
