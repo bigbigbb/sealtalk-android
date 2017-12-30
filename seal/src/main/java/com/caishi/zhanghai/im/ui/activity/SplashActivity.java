@@ -6,18 +6,34 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealAppContext;
+import com.caishi.zhanghai.im.SealConst;
+import com.caishi.zhanghai.im.SealUserInfoManager;
+import com.caishi.zhanghai.im.bean.GetUserInfoReturnBean;
+import com.caishi.zhanghai.im.bean.LoginBean;
+import com.caishi.zhanghai.im.bean.LoginReturnBean;
 import com.caishi.zhanghai.im.net.AppParm;
+import com.caishi.zhanghai.im.net.CallBackJson;
 import com.caishi.zhanghai.im.net.GetUrlUtil;
 import com.caishi.zhanghai.im.net.SocketClient;
+import com.caishi.zhanghai.im.server.utils.NLog;
+import com.caishi.zhanghai.im.utils.MD5;
+import com.google.gson.Gson;
 
 import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 
 /**
  * Created by AMing on 16/8/5.
@@ -38,14 +54,18 @@ public class SplashActivity extends Activity {
         context = this;
         SharedPreferences sp = getSharedPreferences("config", MODE_PRIVATE);
         String cacheToken = sp.getString("loginToken", "");
+        String  name = sp.getString(SealConst.SEALTALK_LOGING_PHONE,"");
+        String  pwd = sp.getString(SealConst.SEALTALK_LOGING_PASSWORD,"");
+
+        initSocketNet();
         if (!TextUtils.isEmpty(cacheToken)) {
-            RongIM.connect(cacheToken, SealAppContext.getInstance().getConnectCallback());
+            login(name,pwd);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     goToMain();
                 }
-            }, 800);
+            }, 1000);
         } else {
             handler.postDelayed(new Runnable() {
                 @Override
@@ -55,7 +75,7 @@ public class SplashActivity extends Activity {
             }, 800);
         }
 
-        initSocketNet();
+
     }
 
 
@@ -74,9 +94,60 @@ public class SplashActivity extends Activity {
         }).start();
 
 
+    }
+    private void login(final String mobile, final String pwd) {
 
+        LoginBean loginBean = new LoginBean();
+        LoginBean.VBean vBean = new LoginBean.VBean();
+        vBean.setPassword(MD5.getStringMD5(pwd));
+        vBean.setMobile(mobile);
+        loginBean.setV(vBean);
+        loginBean.setM("member");
+        loginBean.setK("login_pass");
+        loginBean.setRid(String.valueOf(System.currentTimeMillis()));
+        final String msg = new Gson().toJson(loginBean);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SocketClient.getInstance().sendMsg(msg, new CallBackJson() {
+                    @Override
+                    public void returnJson(String json) {
+                        Log.e("test", "json" + json);
+                        LoginReturnBean loginReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
+                        Message message = new Message();
+                        message.obj = loginReturnBean;
+                        message.what =0;
+                        handler1.sendMessage(message);
+
+
+                    }
+                });
+            }
+        }).start();
 
     }
+
+    private Handler handler1 = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    LoginReturnBean loginReturnBean = (LoginReturnBean) msg.obj;
+                    Toast.makeText(getApplication(), loginReturnBean.getDesc(), Toast.LENGTH_LONG).show();
+                    if (loginReturnBean.getV().equals("ok")) {
+                        if (null != loginReturnBean.getData()) {
+                            RongIM.connect(loginReturnBean.getData().getToken(), SealAppContext.getInstance().getConnectCallback());
+
+                        }
+                    }
+                    break;
+
+            }
+
+
+        }
+    };
 
     private void goToMain() {
         startActivity(new Intent(context, MainActivity.class));

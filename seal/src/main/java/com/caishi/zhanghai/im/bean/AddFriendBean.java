@@ -23,6 +23,7 @@ public class AddFriendBean {
         return rid;
     }
 
+
     public void setRid(String rid) {
         this.rid = rid;
     }

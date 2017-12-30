@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.caishi.zhanghai.im.App;
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealUserInfoManager;
+import com.caishi.zhanghai.im.bean.FriendAllReturnBean;
 import com.caishi.zhanghai.im.server.response.UserRelationshipResponse;
 import com.caishi.zhanghai.im.server.widget.SelectableRoundedImageView;
 import io.rong.imageloader.core.ImageLoader;
@@ -35,11 +36,11 @@ public class NewFriendListAdapter extends BaseAdapters {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        final UserRelationshipResponse.ResultEntity bean = (UserRelationshipResponse.ResultEntity) dataSet.get(position);
+        final FriendAllReturnBean.DataBean bean = (FriendAllReturnBean.DataBean) dataSet.get(position);
         holder.mName.setText(bean.getUser().getNickname());
         String portraitUri = null;
         if (bean != null && bean.getUser() != null) {
-            UserRelationshipResponse.ResultEntity.UserEntity userEntity = bean.getUser();
+            FriendAllReturnBean.DataBean.UserBean userEntity = bean.getUser();
             portraitUri = SealUserInfoManager.getInstance().getPortraitUri(new UserInfo(
                               userEntity.getId(), userEntity.getNickname(), Uri.parse(userEntity.getPortraitUri())));
         }

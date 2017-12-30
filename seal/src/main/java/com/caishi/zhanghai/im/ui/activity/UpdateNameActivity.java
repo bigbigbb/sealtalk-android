@@ -3,18 +3,26 @@ package com.caishi.zhanghai.im.ui.activity;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealConst;
+import com.caishi.zhanghai.im.bean.SetNickNameBean;
+import com.caishi.zhanghai.im.bean.SetNickNameReturnBean;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
 import com.caishi.zhanghai.im.server.network.http.HttpException;
 import com.caishi.zhanghai.im.server.response.SetNameResponse;
 import com.caishi.zhanghai.im.server.utils.NToast;
 import com.caishi.zhanghai.im.server.widget.ClearWriteEditText;
 import com.caishi.zhanghai.im.server.widget.LoadDialog;
+import com.google.gson.Gson;
+
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.UserInfo;
 
@@ -49,6 +57,51 @@ public class UpdateNameActivity extends BaseActivity implements View.OnClickList
     }
 
 
+    private void  setNickName(){
+        final SetNickNameBean setNickNameBean = new SetNickNameBean();
+        setNickNameBean.setK("set_nickname");
+        setNickNameBean.setM("member");
+        setNickNameBean.setRid(String.valueOf(System.currentTimeMillis()));
+        SetNickNameBean.VBean vBean = new SetNickNameBean.VBean();
+        vBean.setNickname(newName);
+        setNickNameBean.setV(vBean);
+        final String msg = new Gson().toJson(setNickNameBean);
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
+            @Override
+            public void returnJson(String json) {
+                SetNickNameReturnBean setNickNameReturnBean  = new Gson().fromJson(json,SetNickNameReturnBean.class);
+                Message message = new Message();
+                message.obj = setNickNameReturnBean;
+                handler.sendMessage(message);
+            }
+        });
+
+    }
+
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            SetNickNameReturnBean  setNickNameReturnBean =  (SetNickNameReturnBean)msg.obj;
+            NToast.shortToast(mContext, setNickNameReturnBean.getDesc());
+            if(setNickNameReturnBean.getV().equals("ok")){
+                editor.putString(SealConst.SEALTALK_LOGIN_NAME, newName);
+                editor.commit();
+
+                BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.CHANGEINFO);
+
+                RongIM.getInstance().refreshUserInfoCache(new UserInfo(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""), newName, Uri.parse(sp.getString(SealConst.SEALTALK_LOGING_PORTRAIT, ""))));
+                RongIM.getInstance().setCurrentUserInfo(new UserInfo(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""), newName, Uri.parse(sp.getString(SealConst.SEALTALK_LOGING_PORTRAIT, ""))));
+
+                LoadDialog.dismiss(mContext);
+
+                finish();
+            }
+
+        }
+    };
+
     @Override
     public Object doInBackground(int requestCode, String id) throws HttpException {
         return action.setName(newName);
@@ -77,7 +130,8 @@ public class UpdateNameActivity extends BaseActivity implements View.OnClickList
         newName = mNameEditText.getText().toString().trim();
         if (!TextUtils.isEmpty(newName)) {
             LoadDialog.show(mContext);
-            request(UPDATE_NAME, true);
+//            request(UPDATE_NAME, true);
+            setNickName();
         } else {
             NToast.shortToast(mContext, "昵称不能为空");
             mNameEditText.setShakeAnimation();

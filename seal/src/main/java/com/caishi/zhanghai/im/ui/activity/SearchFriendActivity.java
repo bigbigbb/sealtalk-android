@@ -213,7 +213,7 @@ public class SearchFriendActivity extends BaseActivity {
 
 
     private void addFriend() {
-        final AddFriendBean addFriendBean = new AddFriendBean();
+        AddFriendBean addFriendBean = new AddFriendBean();
         addFriendBean.setK("invite");
         addFriendBean.setM("friend");
         addFriendBean.setRid(String.valueOf(System.currentTimeMillis()));
@@ -228,7 +228,7 @@ public class SearchFriendActivity extends BaseActivity {
                 AddFriendReturnBean addFriendReturnBean = new Gson().fromJson(json, AddFriendReturnBean.class);
                 if (null != addFriendReturnBean) {
                     Message message = new Message();
-                    message.obj = addFriendBean;
+                    message.obj = addFriendReturnBean;
                     message.what = 1;
                     handler.sendMessage(message);
                 }

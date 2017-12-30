@@ -1,17 +1,16 @@
 package com.caishi.zhanghai.im.bean;
 
 /**
- * Created by shihui on 2017/12/29.
+ * Created by yusy on 2017/12/30.
  */
 
-public class GetUserInfoBean {
-
+public class SetNickNameBean  {
 
     /**
      * rid : xxyy
      * m : member
-     * k : user_info
-     * v : {"id":"bdc59baa47627c4b38c43fe2fbc4f4ae"}
+     * k : set_nickname
+     * v : {"nickname":"张三丰"}
      */
 
     private String rid;
@@ -53,17 +52,17 @@ public class GetUserInfoBean {
 
     public static class VBean {
         /**
-         * id : bdc59baa47627c4b38c43fe2fbc4f4ae
+         * nickname : 张三丰
          */
 
-        private String id;
+        private String nickname;
 
-        public String getId() {
-            return id;
+        public String getNickname() {
+            return nickname;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
         }
     }
 }

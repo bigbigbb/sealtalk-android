@@ -203,6 +203,7 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
                     RongIM.getInstance().startPrivateChat(context, uiConversation.getConversationSenderId(), bean.getSourceUserNickname());
 
                 }

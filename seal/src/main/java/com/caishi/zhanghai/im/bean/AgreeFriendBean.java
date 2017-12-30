@@ -1,17 +1,16 @@
 package com.caishi.zhanghai.im.bean;
 
 /**
- * Created by shihui on 2017/12/29.
+ * Created by yusy on 2017/12/30.
  */
 
-public class GetUserInfoBean {
-
+public class AgreeFriendBean {
 
     /**
      * rid : xxyy
-     * m : member
-     * k : user_info
-     * v : {"id":"bdc59baa47627c4b38c43fe2fbc4f4ae"}
+     * m : friend
+     * k : agree
+     * v : {"friendId":"c73480767ffd0840652d3da4f44f0466"}
      */
 
     private String rid;
@@ -53,17 +52,17 @@ public class GetUserInfoBean {
 
     public static class VBean {
         /**
-         * id : bdc59baa47627c4b38c43fe2fbc4f4ae
+         * friendId : c73480767ffd0840652d3da4f44f0466
          */
 
-        private String id;
+        private String friendId;
 
-        public String getId() {
-            return id;
+        public String getFriendId() {
+            return friendId;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setFriendId(String friendId) {
+            this.friendId = friendId;
         }
     }
 }

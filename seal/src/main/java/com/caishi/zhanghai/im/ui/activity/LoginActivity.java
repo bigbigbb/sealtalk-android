@@ -189,6 +189,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         getUserInfoBean.setK("user_info");
         getUserInfoBean.setM("member");
         getUserInfoBean.setRid(String.valueOf(System.currentTimeMillis()));
+        GetUserInfoBean.VBean  vBean = new GetUserInfoBean.VBean();
+        vBean.setId(connectResultId);
+        getUserInfoBean.setV(vBean);
         String  msg = new Gson().toJson(getUserInfoBean);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override

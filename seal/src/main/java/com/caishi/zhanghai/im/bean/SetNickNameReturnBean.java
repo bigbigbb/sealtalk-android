@@ -1,23 +1,24 @@
 package com.caishi.zhanghai.im.bean;
 
 /**
- * Created by shihui on 2017/12/29.
+ * Created by yusy on 2017/12/30.
  */
 
-public class GetUserInfoBean {
-
+public class SetNickNameReturnBean {
 
     /**
      * rid : xxyy
      * m : member
-     * k : user_info
-     * v : {"id":"bdc59baa47627c4b38c43fe2fbc4f4ae"}
+     * k : set_nickname
+     * v : ok
+     * desc : 修改成功
      */
 
     private String rid;
     private String m;
     private String k;
-    private VBean v;
+    private String v;
+    private String desc;
 
     public String getRid() {
         return rid;
@@ -43,27 +44,19 @@ public class GetUserInfoBean {
         this.k = k;
     }
 
-    public VBean getV() {
+    public String getV() {
         return v;
     }
 
-    public void setV(VBean v) {
+    public void setV(String v) {
         this.v = v;
     }
 
-    public static class VBean {
-        /**
-         * id : bdc59baa47627c4b38c43fe2fbc4f4ae
-         */
+    public String getDesc() {
+        return desc;
+    }
 
-        private String id;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }
