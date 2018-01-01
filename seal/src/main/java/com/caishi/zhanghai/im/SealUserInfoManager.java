@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -18,6 +19,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import com.caishi.zhanghai.im.bean.FriendAllBean;
+import com.caishi.zhanghai.im.bean.FriendAllReturnBean;
 import com.caishi.zhanghai.im.db.BlackList;
 import com.caishi.zhanghai.im.db.BlackListDao;
 import com.caishi.zhanghai.im.db.DBManager;
@@ -28,6 +31,8 @@ import com.caishi.zhanghai.im.db.GroupMemberDao;
 import com.caishi.zhanghai.im.db.Groups;
 import com.caishi.zhanghai.im.db.GroupsDao;
 import com.caishi.zhanghai.im.db.UserInfoBean;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.SealAction;
 import com.caishi.zhanghai.im.server.network.async.AsyncTaskManager;
 import com.caishi.zhanghai.im.server.network.async.OnDataListener;
@@ -41,6 +46,8 @@ import com.caishi.zhanghai.im.server.response.GetTokenResponse;
 import com.caishi.zhanghai.im.server.response.UserRelationshipResponse;
 import com.caishi.zhanghai.im.server.utils.NLog;
 import com.caishi.zhanghai.im.server.utils.RongGenerate;
+import com.google.gson.Gson;
+
 import io.rong.common.RLog;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
@@ -118,6 +125,7 @@ public class SealUserInfoManager implements OnDataListener {
     public SealUserInfoManager(Context context) {
         mContext = context;
         mAsyncTaskManager = AsyncTaskManager.getInstance(mContext);
+
         sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         action = new SealAction(mContext);
         mHandler = new Handler(Looper.getMainLooper());
@@ -359,16 +367,26 @@ public class SealUserInfoManager implements OnDataListener {
         sp.edit().putInt("getAllUserInfoState", mGetAllUserInfoState).apply();
     }
 
+    private FriendAllReturnBean friendAllReturnBean;
+
+
+    public void  setFriendAllReturnBean(FriendAllReturnBean friendAllBean){
+        this.friendAllReturnBean = friendAllBean;
+    }
+
+
+
+
     private boolean fetchFriends() throws HttpException {
-        UserRelationshipResponse userRelationshipResponse;
+        FriendAllReturnBean userRelationshipResponse;
         try {
-            userRelationshipResponse = action.getAllUserRelationship();
+            userRelationshipResponse = friendAllReturnBean;
         } catch (JSONException e) {
             NLog.d(TAG, "fetchFriends occurs JSONException e=" + e.toString());
             return true;
         }
-        if (userRelationshipResponse != null && userRelationshipResponse.getCode() == 200) {
-            List<UserRelationshipResponse.ResultEntity> list = userRelationshipResponse.getResult();
+        if (userRelationshipResponse != null && userRelationshipResponse.getV().equals("ok")) {
+            List<FriendAllReturnBean.DataBean> list = userRelationshipResponse.getData();
             if (list != null && list.size() > 0) {
                 syncDeleteFriends();
                 addFriends(list);
@@ -379,17 +397,18 @@ public class SealUserInfoManager implements OnDataListener {
         return false;
     }
 
+
     private List<Friend> pullFriends() throws HttpException {
         List<Friend> friendsList = null;
-        UserRelationshipResponse userRelationshipResponse;
+        FriendAllReturnBean userRelationshipResponse;
         try {
-            userRelationshipResponse = action.getAllUserRelationship();
+            userRelationshipResponse = friendAllReturnBean;
         } catch (JSONException e) {
             NLog.d(TAG, "pullFriends occurs JSONException e=" + e.toString());
             return null;
         }
-        if (userRelationshipResponse != null && userRelationshipResponse.getCode() == 200) {
-            List<UserRelationshipResponse.ResultEntity> list = userRelationshipResponse.getResult();
+        if (userRelationshipResponse != null && userRelationshipResponse.getV().equals("ok")) {
+            List<FriendAllReturnBean.DataBean> list = userRelationshipResponse.getData();
             if (list != null && list.size() > 0) {
                 syncDeleteFriends();
                 friendsList = addFriends(list);
@@ -793,10 +812,10 @@ public class SealUserInfoManager implements OnDataListener {
      * @param list server获取的好友信息
      * @return List<Friend> 好友列表
      */
-    private List<Friend> addFriends(final List<UserRelationshipResponse.ResultEntity> list) {
+    private List<Friend> addFriends(final List<FriendAllReturnBean.DataBean> list) {
         if (list != null && list.size() > 0) {
             List<Friend> friendsList = new ArrayList<>();
-            for (UserRelationshipResponse.ResultEntity resultEntity : list) {
+            for (FriendAllReturnBean.DataBean resultEntity : list) {
                 if (resultEntity.getStatus() == 20) {
                     Friend friend = new Friend(
                             resultEntity.getUser().getId(),

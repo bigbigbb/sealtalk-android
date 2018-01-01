@@ -10,6 +10,7 @@ import org.apache.http.entity.StringEntity;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import com.caishi.zhanghai.im.bean.FriendAllReturnBean;
 import com.caishi.zhanghai.im.server.network.http.HttpException;
 import com.caishi.zhanghai.im.server.request.AddGroupMemberRequest;
 import com.caishi.zhanghai.im.server.request.AddToBlackListRequest;
@@ -428,6 +429,8 @@ public class SealAction extends BaseAction {
         }
         return response;
     }
+
+
 
     /**
      * 根据userId去服务器查询好友信息

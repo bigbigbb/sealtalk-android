@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealConst;
 import com.caishi.zhanghai.im.SealUserInfoManager;
+import com.caishi.zhanghai.im.bean.FriendAllBean;
+import com.caishi.zhanghai.im.bean.FriendAllReturnBean;
 import com.caishi.zhanghai.im.bean.GetUserInfoBean;
 import com.caishi.zhanghai.im.bean.GetUserInfoReturnBean;
 import com.caishi.zhanghai.im.bean.LoginBean;
@@ -291,7 +293,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         editor.apply();
                         RongIM.getInstance().refreshUserInfoCache(new UserInfo(connectResultId, nickName, Uri.parse(portraitUri)));
                     }
+
+                    getAllFriendShip();
+                    break;
+                case 2:
+                    FriendAllReturnBean friendAllReturnBean = (FriendAllReturnBean) msg.obj;
                     //不继续在login界面同步好友,群组,群组成员信息
+                    SealUserInfoManager.getInstance().setFriendAllReturnBean(friendAllReturnBean);
                     SealUserInfoManager.getInstance().getAllUserInfo();
                     goToMain();
                     break;
@@ -300,6 +308,31 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             }
     };
+
+    private  void   getAllFriendShip(){
+        final FriendAllBean friendAllBean = new FriendAllBean();
+        friendAllBean.setK("all");
+        friendAllBean.setM("friend");
+        friendAllBean.setRid(String.valueOf(System.currentTimeMillis()));
+        final String msg = new Gson().toJson(friendAllBean);
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
+            @Override
+            public void returnJson(String json) {
+                Log.e("msg1111", json);
+                FriendAllReturnBean friendAllReturnBean = new Gson().fromJson(json, FriendAllReturnBean.class);
+                if(null!=friendAllReturnBean){
+                    Message message = new Message();
+                    message.obj = friendAllReturnBean;
+                    message.what = 2;
+                    handler.sendMessage(message);
+                }
+
+
+            }
+        });
+
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

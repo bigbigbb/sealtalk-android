@@ -5,6 +5,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class ContactNotificationMessageProvider extends IContainerItemProvider.M
     public void bindView(View v, int position, ContactNotificationMessage content, UIMessage message) {
         ViewHolder viewHolder = (ViewHolder) v.getTag();
         if (content != null) {
+            Log.e("收到",content.getExtra());
             if (!TextUtils.isEmpty(content.getExtra())) {
                 ContactNotificationMessageData bean = null;
                 try {
@@ -56,6 +58,7 @@ public class ContactNotificationMessageProvider extends IContainerItemProvider.M
                             viewHolder.contentTextView.setText(RongContext.getInstance().getResources().getString(R.string.contact_notification_agree_your_request));
                         }
                     }
+
                     if (content.getOperation().equals("Request")) {
                         viewHolder.contentTextView.setText(content.getMessage());
                     }

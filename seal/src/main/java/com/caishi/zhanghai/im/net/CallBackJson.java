@@ -6,4 +6,5 @@ package com.caishi.zhanghai.im.net;
 
 public interface CallBackJson {
     void   returnJson(String json);
+
 }

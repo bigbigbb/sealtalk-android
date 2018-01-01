@@ -425,23 +425,18 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         GetCodeBean.VBean vBean = new GetCodeBean.VBean();
         vBean.setMobile(phone);
         getCodeBean.setV(vBean);
-        final String json = new Gson().toJson(getCodeBean);
-        new Thread(new Runnable() {
+        String json = new Gson().toJson(getCodeBean);
+        SocketClient.getInstance().sendMessage(json, new CallBackJson() {
             @Override
-            public void run() {
-                SocketClient.getInstance().sendMsg(json, new CallBackJson() {
-                    @Override
-                    public void returnJson(String json) {
-                        Log.e("test", "json" + json);
-                        GetCodeReturnBean getCodeReturnBean = new Gson().fromJson(json, GetCodeReturnBean.class);
-                        Message message = new Message();
-                        message.obj = getCodeReturnBean;
-                        handler.sendMessage(message);
+            public void returnJson(String json) {
+                Log.e("test", "json" + json);
+                GetCodeReturnBean getCodeReturnBean = new Gson().fromJson(json, GetCodeReturnBean.class);
+                Message message = new Message();
+                message.obj = getCodeReturnBean;
+                handler.sendMessage(message);
 
-                    }
-                });
             }
-        }).start();
+        });
 
     }
 

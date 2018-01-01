@@ -98,8 +98,8 @@
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="com.android.support:support-annotations:23.4.0@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\sealtalk-android\sticker\libs\BQMMRongCloudPlugin-v1.0.6.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-v4-23.4.0" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\sticker\libs\BQMMRongCloudPlugin-v1.0.6.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="android-android-23" level="project" />
     <orderEntry type="library" exported="" name="org.apache.http.legacy-android-23" level="project" />
   </component>

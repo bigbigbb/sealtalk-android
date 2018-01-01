@@ -96,6 +96,10 @@ public class SocketClient{
 
     }
 
+
+
+
+
     public void sendMessage(final String msg, final CallBackJson classBack){
         new Thread(new Runnable() {
             @Override
@@ -104,6 +108,8 @@ public class SocketClient{
             }
         }).start();
     }
+
+
     public void sendMsg(String msg) {
         mClassBack = null;
         if (null != mSocket && null != mSocket.get()) {
@@ -177,6 +183,7 @@ public class SocketClient{
 
                             }else if(null!=mClassBack){
                                 mClassBack.returnJson(message);
+
                             }
 
                             //收到服务器过来的消息，就通过Broadcast发送出去
@@ -198,6 +205,7 @@ public class SocketClient{
         }
 
     }
+
 
 
 }

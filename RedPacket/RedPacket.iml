@@ -95,9 +95,9 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\sealtalk-android\RedPacket\libs\jrmfry-1.5.0.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\sealtalk-android\RedPacket\libs\alipaySingle-20170510.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\RedPacket\libs\jrmfry-1.5.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.google.code.gson:gson:2.2.4@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\RedPacket\libs\alipaySingle-20170510.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="android-android-23" level="project" />
   </component>
 </module>

@@ -59,7 +59,8 @@ public class SplashActivity extends Activity {
 
         initSocketNet();
         if (!TextUtils.isEmpty(cacheToken)) {
-            login(name,pwd);
+//            login(name,pwd);
+            RongIM.connect(cacheToken, SealAppContext.getInstance().getConnectCallback());
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
