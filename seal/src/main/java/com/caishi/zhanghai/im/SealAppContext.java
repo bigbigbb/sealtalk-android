@@ -196,7 +196,7 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
             ContactNotificationMessage contactNotificationMessage = (ContactNotificationMessage) messageContent;
             if (contactNotificationMessage.getOperation().equals("AcceptResponse")) {
                 // 被加方同意请求后
-                if (contactNotificationMessage.getExtra() != null) {
+                if (contactNotificationMessage.getExtra() != null&&!(contactNotificationMessage.getExtra()).isEmpty()) {
                     ContactNotificationMessageData bean = null;
                     try {
                         bean = JsonMananger.jsonToBean(contactNotificationMessage.getExtra(), ContactNotificationMessageData.class);
