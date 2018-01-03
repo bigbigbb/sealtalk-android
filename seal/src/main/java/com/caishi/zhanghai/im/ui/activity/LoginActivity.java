@@ -314,7 +314,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         friendAllBean.setK("all");
         friendAllBean.setM("friend");
         friendAllBean.setRid(String.valueOf(System.currentTimeMillis()));
-        final String msg = new Gson().toJson(friendAllBean);
+         final String msg = new Gson().toJson(friendAllBean);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
