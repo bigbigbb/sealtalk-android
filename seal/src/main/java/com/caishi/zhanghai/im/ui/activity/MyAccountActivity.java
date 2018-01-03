@@ -20,6 +20,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.caishi.zhanghai.im.bean.UpLoadPictureBean;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
+import com.google.gson.Gson;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
@@ -256,6 +260,23 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
     }
 
 
+    private void  uploadPicture(){
+        UpLoadPictureBean upLoadPictureBean = new UpLoadPictureBean();
+        upLoadPictureBean.setK("portrait");
+        upLoadPictureBean.setM("member");
+        upLoadPictureBean.setRid(String.valueOf(System.currentTimeMillis()));
+        UpLoadPictureBean.VBean vBean = new UpLoadPictureBean.VBean();
+        vBean.setImgbase64(imageUrl);
+        upLoadPictureBean.setV(vBean);
+        String msg = new Gson().toJson(upLoadPictureBean);
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
+            @Override
+            public void returnJson(String json) {
+
+            }
+        });
+
+    }
     public void uploadImage(final String domain, String imageToken, Uri imagePath) {
         if (TextUtils.isEmpty(domain) && TextUtils.isEmpty(imageToken) && TextUtils.isEmpty(imagePath.toString())) {
             throw new RuntimeException("upload parameter is null!");
