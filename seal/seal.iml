@@ -95,7 +95,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
@@ -104,29 +103,29 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\qiniu-android-sdk-7.1.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:multidex-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-v4-23.4.0" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\AMap_2DMap_V2.9.0_20160525.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\MiPush_SDK_Client_3_2_2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="HMS-SDK-2.4.0.300:@aar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\okio-1.6.0.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\jsoup-1.8.3.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\greendao-1.3.7.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="commons-cli:commons-cli:1.2@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\okhttp-2.7.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\AMap_2DMap_V2.9.0_20160525.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="com.android.support:multidex-instrumentation-1.0.1" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\okhttp-2.7.0.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\umeng-analytics-v5.2.4.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\org.apache.http.legacy.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\qiniu-android-sdk-7.1.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-annotations:23.4.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\happy-dns-0.2.3.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:appcompat-v7-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\greendao-1.3.7.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\AMap_Search_V3.4.0_20160811.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\fastjson-1.2.5.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\MiPush_SDK_Client_3_2_2.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\happy-dns-0.2.3.2.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\okio-1.6.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\AMap_Channel_Location_V1.4.0_20160708.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\umeng-analytics-v5.2.4.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\AMap_Search_V3.4.0_20160811.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.google.android.gms:play-services-basement-8.3.0" level="project" />
-    <orderEntry type="library" exported="" name="__local_jars__:E.\as_workspace\zhanghai-android\seal\libs\AMap_Channel_Location_V1.4.0_20160708.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.google.android.gms:play-services-measurement-8.3.0" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\org.apache.http.legacy.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\jsoup-1.8.3.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.google.code.findbugs:jsr305:2.0.1@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\shihui\AndroidStudioProjects\zhanghai-android\seal\libs\fastjson-1.2.5.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="com.facebook.stetho:stetho-1.4.1" level="project" />
     <orderEntry type="module" module-name="contactcard" exported="" />
     <orderEntry type="module" module-name="RedPacket" exported="" />
@@ -134,6 +133,5 @@
     <orderEntry type="module" module-name="CallKit" exported="" />
     <orderEntry type="module" module-name="IMKit" exported="" />
     <orderEntry type="module" module-name="sticker" exported="" />
-    <orderEntry type="library" exported="" name="android-android-23" level="project" />
   </component>
 </module>

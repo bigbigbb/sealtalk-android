@@ -5,10 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Looper;
 import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.caishi.zhanghai.im.net.AppParm;
+import com.caishi.zhanghai.im.net.GetUrlUtil;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.dumpapp.DumperPlugin;
 import com.facebook.stetho.inspector.database.DefaultDatabaseConnectionProvider;
@@ -53,6 +57,7 @@ public class App extends MultiDexApplication {
     public void onCreate() {
 
         super.onCreate();
+        initSocketNet();
         Stetho.initialize(new Stetho.Initializer(this) {
             @Override
             protected Iterable<DumperPlugin> getDumperPlugins() {
@@ -170,6 +175,23 @@ public class App extends MultiDexApplication {
         }
     }
 
+    private SocketClient mSocketClient;
+    private void  initSocketNet(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GetUrlUtil.requestGet();
+                Looper.prepare();
+                if(null!= AppParm.IP&&null!=AppParm.PORT){
+                    mSocketClient = SocketClient.getInstance();
+                    mSocketClient.initSocket();
+                }
+                Looper.loop();
+            }
+        }).start();
+
+
+    }
     public static DisplayImageOptions getOptions() {
         return options;
     }

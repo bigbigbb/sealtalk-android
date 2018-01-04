@@ -25,7 +25,12 @@ import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealAppContext;
 import com.caishi.zhanghai.im.SealConst;
 import com.caishi.zhanghai.im.SealUserInfoManager;
+import com.caishi.zhanghai.im.bean.RemarkNameBean;
+import com.caishi.zhanghai.im.bean.SetNickNameBean;
+import com.caishi.zhanghai.im.bean.SetNickNameReturnBean;
 import com.caishi.zhanghai.im.db.Friend;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
 import com.caishi.zhanghai.im.server.network.http.HttpException;
 import com.caishi.zhanghai.im.server.pinyin.CharacterParser;
@@ -37,6 +42,7 @@ import com.caishi.zhanghai.im.server.utils.RongGenerate;
 import com.caishi.zhanghai.im.server.widget.DialogWithYesOrNoUtils;
 import com.caishi.zhanghai.im.server.widget.LoadDialog;
 import com.caishi.zhanghai.im.ui.widget.SinglePopWindow;
+import com.google.gson.Gson;
 
 //CallKit start 1
 import io.rong.callkit.RongCallAction;
@@ -108,6 +114,7 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
         mAddFriendButton.setOnClickListener(this);
         mUserPhone.setOnClickListener(this);
     }
+
 
     private void initData() {
         mType = getIntent().getIntExtra("type", 0);

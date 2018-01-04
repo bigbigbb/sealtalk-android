@@ -57,16 +57,26 @@ public class SplashActivity extends Activity {
         String  name = sp.getString(SealConst.SEALTALK_LOGING_PHONE,"");
         String  pwd = sp.getString(SealConst.SEALTALK_LOGING_PASSWORD,"");
 
-        initSocketNet();
-        if (!TextUtils.isEmpty(cacheToken)) {
-//            login(name,pwd);
-            RongIM.connect(cacheToken, SealAppContext.getInstance().getConnectCallback());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    goToMain();
-                }
-            }, 1000);
+//        initSocketNet();
+//        if (!TextUtils.isEmpty(cacheToken)) {
+//            RongIM.connect(cacheToken, SealAppContext.getInstance().getConnectCallback());
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    goToMain();
+//                }
+//            }, 1000);
+//        } else {
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    goToLogin();
+//                }
+//            }, 800);
+//        }
+
+        if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(pwd)) {
+            login(name,pwd);
         } else {
             handler.postDelayed(new Runnable() {
                 @Override
@@ -77,25 +87,10 @@ public class SplashActivity extends Activity {
         }
 
 
-    }
-
-
-    private void  initSocketNet(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                GetUrlUtil.requestGet();
-                Looper.prepare();
-                if(null!= AppParm.IP&&null!=AppParm.PORT){
-                    mSocketClient = SocketClient.getInstance();
-                    mSocketClient.initSocket();
-                }
-                Looper.loop();
-            }
-        }).start();
 
 
     }
+
     private void login(final String mobile, final String pwd) {
 
         LoginBean loginBean = new LoginBean();
@@ -139,7 +134,7 @@ public class SplashActivity extends Activity {
                     if (loginReturnBean.getV().equals("ok")) {
                         if (null != loginReturnBean.getData()) {
                             RongIM.connect(loginReturnBean.getData().getToken(), SealAppContext.getInstance().getConnectCallback());
-
+                            goToMain();
                         }
                     }
                     break;
