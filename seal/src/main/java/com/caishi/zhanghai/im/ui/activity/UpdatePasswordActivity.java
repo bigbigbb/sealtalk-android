@@ -2,6 +2,8 @@ package com.caishi.zhanghai.im.ui.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -11,10 +13,16 @@ import android.widget.EditText;
 
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealConst;
+import com.caishi.zhanghai.im.bean.BaseReturnBean;
+import com.caishi.zhanghai.im.bean.UpdatePwdBean;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.network.http.HttpException;
 import com.caishi.zhanghai.im.server.response.ChangePasswordResponse;
 import com.caishi.zhanghai.im.server.utils.NToast;
 import com.caishi.zhanghai.im.server.widget.LoadDialog;
+import com.caishi.zhanghai.im.utils.MD5;
+import com.google.gson.Gson;
 
 /**
  * Created by AMing on 16/6/23.
@@ -153,10 +161,53 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
         mOldPassword = old;
         mNewPassword = new1;
         LoadDialog.show(mContext);
-        request(UPDATE_PASSWORD, true);
+//        request(UPDATE_PASSWORD, true);
+        updatePwd();
 
     }
 
+    private void updatePwd(){
+        UpdatePwdBean updatePwdBean = new UpdatePwdBean();
+        UpdatePwdBean.VBean vBean = new UpdatePwdBean.VBean();
+        vBean.setNewPassword(MD5.getStringMD5(mNewPassword));
+        vBean.setOldPassword(MD5.getStringMD5(mOldPassword));
+        updatePwdBean.setV(vBean);
+        updatePwdBean.setM("member");
+        updatePwdBean.setK("pwd_via_pwd");
+        updatePwdBean.setRid(String.valueOf(System.currentTimeMillis()));
+        String msg = new Gson().toJson(updatePwdBean);
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
+            @Override
+            public void returnJson(String json) {
+                BaseReturnBean baseReturnBean = new Gson().fromJson(json,BaseReturnBean.class);
+                if(null!=baseReturnBean){
+                    Message message = new Message();
+                    message.obj = baseReturnBean;
+                    handler.sendMessage(message);
+
+                }
+
+
+
+            }
+        });
+    }
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            BaseReturnBean baseReturnBean = (BaseReturnBean) msg.obj;
+            NToast.shortToast(mContext, baseReturnBean.getDesc());
+            LoadDialog.dismiss(mContext);
+            if(baseReturnBean.getV().equals("ok")){
+                editor.putString(SealConst.SEALTALK_LOGING_PASSWORD, newPasswordEdit.getText().toString().trim());
+                editor.apply();
+
+                finish();
+            }
+        }
+    };
 
     @Override
     public Object doInBackground(int requestCode, String id) throws HttpException {

@@ -2,14 +2,23 @@ package com.caishi.zhanghai.im.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.caishi.zhanghai.im.R;
+import com.caishi.zhanghai.im.bean.BaseReturnBean;
+import com.caishi.zhanghai.im.bean.ForgetPwdBean;
+import com.caishi.zhanghai.im.bean.GetCodeBean;
+import com.caishi.zhanghai.im.bean.GetCodeReturnBean;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.network.http.HttpException;
 import com.caishi.zhanghai.im.server.response.CheckPhoneResponse;
 import com.caishi.zhanghai.im.server.response.RestPasswordResponse;
@@ -21,6 +30,7 @@ import com.caishi.zhanghai.im.server.utils.downtime.DownTimer;
 import com.caishi.zhanghai.im.server.utils.downtime.DownTimerListener;
 import com.caishi.zhanghai.im.server.widget.ClearWriteEditText;
 import com.caishi.zhanghai.im.server.widget.LoadDialog;
+import com.google.gson.Gson;
 
 /**
  * Created by AMing on 16/2/2.
@@ -68,8 +78,13 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 if (s.length() == 11) {
                     if (AMUtils.isMobile(s.toString().trim())) {
                         phone = mPhone.getText().toString().trim();
-                        request(CHECK_PHONE, true);
+                        //暂时去掉   本来是融云用来调用自己后台的接口来判断输入的手机号是否可用
+                        //加上设置true
+                        mGetCode.setClickable(true);
+                        mGetCode.setBackgroundDrawable(getResources().getDrawable(R.drawable.rs_select_btn_blue));
+//                        request(CHECK_PHONE, true);
                         AMUtils.onInactive(mContext, mPhone);
+
                     } else {
                         Toast.makeText(mContext, R.string.Illegal_phone_number, Toast.LENGTH_SHORT).show();
                     }
@@ -93,12 +108,12 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() == 6) {
+                if (s.length() == 4) {
                     AMUtils.onInactive(mContext, mCode);
-                    if (available) {
+//                    if (available) {
                         mOK.setClickable(true);
                         mOK.setBackgroundDrawable(getResources().getDrawable(R.drawable.rs_select_btn_blue));
-                    }
+//                    }
                 } else {
                     mOK.setClickable(false);
                     mOK.setBackgroundDrawable(getResources().getDrawable(R.drawable.rs_select_btn_gray));
@@ -126,6 +141,91 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         }
         return super.doInBackground(requestCode, id);
     }
+
+    /**
+     * 获取注册的验证码
+     *
+     * @param phone
+     */
+    private void getCode(String phone) {
+        final GetCodeBean getCodeBean = new GetCodeBean();
+        getCodeBean.setM("common");
+        getCodeBean.setK("get_smscode_resetpwd");
+        getCodeBean.setRid(String.valueOf(System.currentTimeMillis()));
+        GetCodeBean.VBean vBean = new GetCodeBean.VBean();
+        vBean.setMobile(phone);
+        getCodeBean.setV(vBean);
+        String json = new Gson().toJson(getCodeBean);
+        SocketClient.getInstance().sendMessage(json, new CallBackJson() {
+            @Override
+            public void returnJson(String json) {
+                Log.e("test", "json" + json);
+                GetCodeReturnBean getCodeReturnBean = new Gson().fromJson(json, GetCodeReturnBean.class);
+                Message message = new Message();
+                message.obj = getCodeReturnBean;
+                message.what = 0;
+                handler.sendMessage(message);
+
+            }
+        });
+
+    }
+
+    private void verifyCode() {
+        ForgetPwdBean forgetPwdBean = new ForgetPwdBean();
+        forgetPwdBean.setM("member");
+        forgetPwdBean.setK("pwd_via_sms");
+        forgetPwdBean.setRid(String.valueOf(System.currentTimeMillis()));
+        ForgetPwdBean.VBean vBean = new ForgetPwdBean.VBean();
+        vBean.setMobile(phone);
+        vBean.setPassword(mPassword1.getText().toString().trim());
+        vBean.setSms_code(mCode.getText().toString().trim());
+        forgetPwdBean.setV(vBean);
+        final String msg = new Gson().toJson(forgetPwdBean);
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
+            @Override
+            public void returnJson(String json) {
+                BaseReturnBean baseReturnBean = new Gson().fromJson(json, BaseReturnBean.class);
+                if (null != baseReturnBean) {
+                    Message message = new Message();
+                    message.what = 1;
+                    message.obj = baseReturnBean;
+                    handler.sendMessage(message);
+
+                }
+            }
+        });
+    }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0://获取验证码
+                    GetCodeReturnBean getCodeReturnBean = (GetCodeReturnBean) msg.obj;
+                    Toast.makeText(getApplication(), getCodeReturnBean.getDesc(), Toast.LENGTH_LONG).show();
+                    if (getCodeReturnBean.getV().equals("ok")) {
+                        DownTimer downTimer = new DownTimer();
+                        downTimer.setListener(ForgetPasswordActivity.this);
+                        downTimer.startDown(60 * 1000);
+                    }
+                    break;
+                case 1://找回密码成功
+                    BaseReturnBean baseReturnBean = (BaseReturnBean) msg.obj;
+                    LoadDialog.dismiss(mContext);
+                    NToast.shortToast(mContext, baseReturnBean.getDesc());
+                    if (baseReturnBean.getV().equals("ok")) {
+                        Intent data = new Intent();
+                        data.putExtra("phone", phone);
+                        data.putExtra("password", mPassword1.getText().toString());
+                        setResult(CHANGE_PASSWORD_BACK, data);
+                        finish();
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onSuccess(int requestCode, Object result) {
@@ -213,10 +313,11 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 if (TextUtils.isEmpty(mPhone.getText().toString().trim())) {
                     NToast.longToast(mContext, getString(R.string.phone_number_is_null));
                 } else {
-                    DownTimer downTimer = new DownTimer();
-                    downTimer.setListener(this);
-                    downTimer.startDown(60 * 1000);
-                    request(SEND_CODE);
+//                    DownTimer downTimer = new DownTimer();
+//                    downTimer.setListener(this);
+//                    downTimer.startDown(60 * 1000);
+//                    request(SEND_CODE);
+                    getCode(phone);
                 }
                 break;
             case R.id.forget_button:
@@ -255,7 +356,8 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 }
 
                 LoadDialog.show(mContext);
-                request(VERIFY_CODE);
+//                request(VERIFY_CODE);
+                verifyCode();
                 break;
         }
     }

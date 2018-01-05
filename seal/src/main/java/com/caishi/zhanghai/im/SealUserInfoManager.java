@@ -973,31 +973,34 @@ public class SealUserInfoManager implements OnDataListener {
      * @param callback 获取好友信息的回调
      */
     public void getFriends(final ResultCallback<List<Friend>> callback) {
-        mWorkHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                List<Friend> friendsList;
-                if (!doingGetAllUserInfo && !hasGetFriends()) {
-                    if (!isNetworkConnected()) {
-                        onCallBackFail(callback);
-                        return;
+        if(null!=mWorkHandler){
+            mWorkHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    List<Friend> friendsList;
+                    if (!doingGetAllUserInfo && !hasGetFriends()) {
+                        if (!isNetworkConnected()) {
+                            onCallBackFail(callback);
+                            return;
+                        }
+                        try {
+                            friendsList = pullFriends();
+                            sp.edit().putInt("getAllUserInfoState", mGetAllUserInfoState).apply();
+                        } catch (HttpException e) {
+                            onCallBackFail(callback);
+                            NLog.d(TAG, "getFriends occurs HttpException e=" + e.toString() + "mGetAllUserInfoState=" + mGetAllUserInfoState);
+                            return;
+                        }
+                    } else {
+                        friendsList = getFriends();
                     }
-                    try {
-                        friendsList = pullFriends();
-                        sp.edit().putInt("getAllUserInfoState", mGetAllUserInfoState).apply();
-                    } catch (HttpException e) {
-                        onCallBackFail(callback);
-                        NLog.d(TAG, "getFriends occurs HttpException e=" + e.toString() + "mGetAllUserInfoState=" + mGetAllUserInfoState);
-                        return;
+                    if (callback != null) {
+                        callback.onCallback(friendsList);
                     }
-                } else {
-                    friendsList = getFriends();
                 }
-                if (callback != null) {
-                    callback.onCallback(friendsList);
-                }
-            }
-        });
+            });
+        }
+
     }
 
     private List<Friend> syncGetFriends() {

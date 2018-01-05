@@ -15,8 +15,8 @@ import android.widget.TextView;
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealAppContext;
 import com.caishi.zhanghai.im.SealUserInfoManager;
+import com.caishi.zhanghai.im.bean.BaseReturnBean;
 import com.caishi.zhanghai.im.bean.RemarkNameBean;
-import com.caishi.zhanghai.im.bean.SetNickNameReturnBean;
 import com.caishi.zhanghai.im.db.Friend;
 import com.caishi.zhanghai.im.net.CallBackJson;
 import com.caishi.zhanghai.im.net.SocketClient;
@@ -148,7 +148,7 @@ public class NoteInformationActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            SetNickNameReturnBean setNickNameReturnBean = (SetNickNameReturnBean) msg.obj;
+            BaseReturnBean setNickNameReturnBean = (BaseReturnBean) msg.obj;
             if(setNickNameReturnBean.getV().equals("ok")){
                     String displayName = mNoteEdit.getText().toString();
                     if(displayName != null){
@@ -194,7 +194,7 @@ public class NoteInformationActivity extends BaseActivity {
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
-                SetNickNameReturnBean setNickNameReturnBean  = new Gson().fromJson(json,SetNickNameReturnBean.class);
+                BaseReturnBean setNickNameReturnBean  = new Gson().fromJson(json,BaseReturnBean.class);
                 if(null!=setNickNameReturnBean){
                     Message message = new Message();
                     message.obj = setNickNameReturnBean;

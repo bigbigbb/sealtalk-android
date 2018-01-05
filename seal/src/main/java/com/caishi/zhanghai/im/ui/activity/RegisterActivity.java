@@ -34,6 +34,7 @@ import com.caishi.zhanghai.im.server.utils.downtime.DownTimer;
 import com.caishi.zhanghai.im.server.utils.downtime.DownTimerListener;
 import com.caishi.zhanghai.im.server.widget.ClearWriteEditText;
 import com.caishi.zhanghai.im.server.widget.LoadDialog;
+import com.caishi.zhanghai.im.utils.MD5;
 import com.google.gson.Gson;
 
 /**
@@ -108,6 +109,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         //暂时去掉   本来是融云用来调用自己后台的接口来判断输入的手机号是否可用
                         //加上设置true
                         mGetCode.setClickable(true);
+                        mGetCode.setBackgroundDrawable(getResources().getDrawable(R.drawable.rs_select_btn_blue));
 //                        request(CHECK_PHONE, true);
                         AMUtils.onInactive(mContext, mPhoneEdit);
                     } else {
@@ -367,7 +369,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         setPassBean.setRid(String.valueOf(System.currentTimeMillis()));
         SetPassBean.VBean vBean = new SetPassBean.VBean();
         vBean.setMobile(mobile);
-        vBean.setPassword(password);
+        vBean.setPassword(MD5.getStringMD5(password));
         vBean.setName(name);
         vBean.setSms_code(code);
         setPassBean.setV(vBean);

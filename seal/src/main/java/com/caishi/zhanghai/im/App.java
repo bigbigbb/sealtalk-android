@@ -57,7 +57,7 @@ public class App extends MultiDexApplication {
     public void onCreate() {
 
         super.onCreate();
-        initSocketNet();
+
         Stetho.initialize(new Stetho.Initializer(this) {
             @Override
             protected Iterable<DumperPlugin> getDumperPlugins() {
@@ -173,6 +173,9 @@ public class App extends MultiDexApplication {
             }));
             RongExtensionManager.getInstance().registerExtensionModule(new RecognizeExtensionModule());
         }
+
+
+        initSocketNet();
     }
 
     private SocketClient mSocketClient;

@@ -1,17 +1,17 @@
 package com.caishi.zhanghai.im.bean;
 
 /**
- * Created by yusy on 2017/12/30.
+ * Created by shihui on 2018/1/5.
  */
 
-public class SetNickNameReturnBean {
+public class BaseReturnBean {
 
     /**
      * rid : xxyy
      * m : member
-     * k : set_nickname
+     * k : pwd_via_pwd
      * v : ok
-     * desc : 修改成功
+     * desc : 密码修改成功
      */
 
     private String rid;

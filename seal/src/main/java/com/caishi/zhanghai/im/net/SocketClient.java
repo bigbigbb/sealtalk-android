@@ -84,7 +84,7 @@ public class SocketClient{
             try {
                 if (!soc.isClosed() && !soc.isOutputShutdown()) {
                     OutputStream os = soc.getOutputStream();
-                    String message = msg;
+                    String message = msg+"$~ZHANGHAI-END-POINT~$";
                     os.write(message.getBytes());
                     os.flush();
                 } else {
@@ -117,7 +117,7 @@ public class SocketClient{
             try {
                 if (!soc.isClosed() && !soc.isOutputShutdown()) {
                     OutputStream os = soc.getOutputStream();
-                    String message = msg;
+                    String message = msg+"$~ZHANGHAI-END-POINT~$";
                     os.write(message.getBytes());
                     os.flush();
                 }

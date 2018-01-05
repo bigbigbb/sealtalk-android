@@ -77,6 +77,12 @@ public class SplashActivity extends Activity {
 
         if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(pwd)) {
             login(name,pwd);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    goToMain();
+                }
+            }, 1000);
         } else {
             handler.postDelayed(new Runnable() {
                 @Override
@@ -101,25 +107,19 @@ public class SplashActivity extends Activity {
         loginBean.setM("member");
         loginBean.setK("login_pass");
         loginBean.setRid(String.valueOf(System.currentTimeMillis()));
+
         final String msg = new Gson().toJson(loginBean);
-        new Thread(new Runnable() {
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
-            public void run() {
-                SocketClient.getInstance().sendMsg(msg, new CallBackJson() {
-                    @Override
-                    public void returnJson(String json) {
-                        Log.e("test", "json" + json);
-                        LoginReturnBean loginReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
-                        Message message = new Message();
-                        message.obj = loginReturnBean;
-                        message.what =0;
-                        handler1.sendMessage(message);
-
-
-                    }
-                });
+            public void returnJson(String json) {
+                Log.e("test", "json" + json);
+                LoginReturnBean loginReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
+                Message message = new Message();
+                message.obj = loginReturnBean;
+                message.what =0;
+                handler1.sendMessage(message);
             }
-        }).start();
+        });
 
     }
 
@@ -134,7 +134,6 @@ public class SplashActivity extends Activity {
                     if (loginReturnBean.getV().equals("ok")) {
                         if (null != loginReturnBean.getData()) {
                             RongIM.connect(loginReturnBean.getData().getToken(), SealAppContext.getInstance().getConnectCallback());
-                            goToMain();
                         }
                     }
                     break;

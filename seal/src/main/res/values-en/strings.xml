@@ -67,7 +67,7 @@
     <string name="set_news_reminded">Message Remind</string>
     <string name="set_privacy">Privacy</string>
     <string name="set_set">Setting</string>
-    <string name="set_rongcloud">About RongCloud</string>
+    <string name="set_rongcloud">About Zhanghai</string>
     <string name="set_logout">Exit</string>
     <string name="de_actionbar_myacc">My Account</string>
     <string name="new_message_notice">Message Remind</string>
@@ -166,7 +166,7 @@
     <string name="contacts">Contacts</string>
     <string name="discover">Discover</string>
     <string name="me">Me</string>
-    <string name="mine_about">About SealTalk</string>
+    <string name="mine_about">About Zhanghai</string>
     <string name="mine_service">Feedback</string>
     <string name="mine_setting">Account Settings</string>
     <string name="account_setting">Account Setting</string>
@@ -287,7 +287,7 @@
 
     <string name="activity_detail_discussion_to_top">To top</string>
     <string name="activity_detail_discussion_not_disturb">Not to disturb</string>
-    <string name="ac_about_seal_talk_version">SealTalk version</string>
+    <string name="ac_about_seal_talk_version">Zhanghai version</string>
     <string name="ac_about_sdk_version">SDK version</string>
     <string name="ac_about_shut_down_debug_mode">Shut down debug mode</string>
     <string name="ac_detail_discussion_member_size">Discussion members()</string>

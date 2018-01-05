@@ -11,7 +11,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="14dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/about_seal" />
+        android:src="@drawable/seal_logo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -138,6 +138,7 @@
 
 
     <View
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0.25dp"
         android:layout_marginLeft="14dp"
@@ -146,6 +147,7 @@
 
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/start_debug"
         android:layout_width="match_parent"
         android:layout_height="47.5dp">
@@ -229,7 +231,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="14dp"
         android:gravity="bottom"
-        android:text="Powered by RongCloud"
+        android:text="Powered by Zhanghai"
         android:textColor="#999"
         android:textSize="14sp" />
 

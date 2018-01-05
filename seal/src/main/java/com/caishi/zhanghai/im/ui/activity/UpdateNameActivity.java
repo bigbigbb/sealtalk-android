@@ -11,8 +11,8 @@ import android.widget.Button;
 
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealConst;
+import com.caishi.zhanghai.im.bean.BaseReturnBean;
 import com.caishi.zhanghai.im.bean.SetNickNameBean;
-import com.caishi.zhanghai.im.bean.SetNickNameReturnBean;
 import com.caishi.zhanghai.im.net.CallBackJson;
 import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
@@ -69,7 +69,7 @@ public class UpdateNameActivity extends BaseActivity implements View.OnClickList
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
-                SetNickNameReturnBean setNickNameReturnBean  = new Gson().fromJson(json,SetNickNameReturnBean.class);
+                BaseReturnBean setNickNameReturnBean  = new Gson().fromJson(json,BaseReturnBean.class);
                 Message message = new Message();
                 message.obj = setNickNameReturnBean;
                 handler.sendMessage(message);
@@ -83,7 +83,7 @@ public class UpdateNameActivity extends BaseActivity implements View.OnClickList
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            SetNickNameReturnBean  setNickNameReturnBean =  (SetNickNameReturnBean)msg.obj;
+            BaseReturnBean  setNickNameReturnBean =  (BaseReturnBean)msg.obj;
             NToast.shortToast(mContext, setNickNameReturnBean.getDesc());
             if(setNickNameReturnBean.getV().equals("ok")){
                 editor.putString(SealConst.SEALTALK_LOGIN_NAME, newName);
