@@ -65,7 +65,7 @@ public class UpdateNameActivity extends BaseActivity implements View.OnClickList
         SetNickNameBean.VBean vBean = new SetNickNameBean.VBean();
         vBean.setNickname(newName);
         setNickNameBean.setV(vBean);
-        final String msg = new Gson().toJson(setNickNameBean);
+        String msg = new Gson().toJson(setNickNameBean);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {

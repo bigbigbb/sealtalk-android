@@ -356,13 +356,13 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 LoadDialog.show(mContext);
                 //取消调用他们后台的接口  改用自己后台的接口
 //                request(VERIFY_CODE, true);
-                confirmRegister(mPhone,mPassword,mCode,mNickName);
+                confirmRegister(mPhone, mPassword, mCode, mNickName);
 
                 break;
         }
     }
 
-    private void confirmRegister(String mobile, String password, String code,String name) {
+    private void confirmRegister(String mobile, String password, String code, String name) {
         SetPassBean setPassBean = new SetPassBean();
         setPassBean.setM("member");
         setPassBean.setK("reg_mobile");
@@ -373,25 +373,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         vBean.setName(name);
         vBean.setSms_code(code);
         setPassBean.setV(vBean);
-        final String msg = new Gson().toJson(setPassBean);
-        new Thread(new Runnable() {
+        String msg = new Gson().toJson(setPassBean);
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
-            public void run() {
-                SocketClient.getInstance().sendMsg(msg, new CallBackJson() {
-                    @Override
-                    public void returnJson(String json) {
-                        Log.e("test", "json" + json);
-                        LoginReturnBean setPassReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
-                        Message message = new Message();
-                        message.obj = setPassReturnBean;
-                        handlerComplete.sendMessage(message);
+            public void returnJson(String json) {
+                Log.e("test", "json" + json);
+                LoginReturnBean setPassReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
+                Message message = new Message();
+                message.obj = setPassReturnBean;
+                handlerComplete.sendMessage(message);
 
-
-                    }
-                });
 
             }
-        }).start();
+        });
+
 
     }
 
@@ -404,7 +399,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             if (setPassReturnBean.getV().equals("ok")) {
                 LoadDialog.dismiss(mContext);
                 NToast.shortToast(mContext, R.string.register_success);
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 intent.putExtra("phone", mPhone);
                 intent.putExtra("password", mPassword);
                 intent.putExtra("nickname", mNickName);
@@ -417,6 +412,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * 获取注册的验证码
+     *
      * @param phone
      */
     private void getCode(String phone) {

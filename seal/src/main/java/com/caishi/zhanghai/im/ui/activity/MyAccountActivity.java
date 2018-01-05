@@ -294,20 +294,22 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
 
 
     private void uploadPicture() {
-        final UpLoadPictureBean upLoadPictureBean = new UpLoadPictureBean();
+        UpLoadPictureBean upLoadPictureBean = new UpLoadPictureBean();
         upLoadPictureBean.setK("portrait");
         upLoadPictureBean.setM("member");
         upLoadPictureBean.setRid(String.valueOf(System.currentTimeMillis()));
         UpLoadPictureBean.VBean vBean = new UpLoadPictureBean.VBean();
-        vBean.setImgbase64(baseString);
+        vBean.setImgbase64("base64("+baseString+")");
         upLoadPictureBean.setV(vBean);
         String msg = new Gson().toJson(upLoadPictureBean);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
                 UpLoadPictureReturnBean upLoadPictureReturnBean = new UpLoadPictureReturnBean();
-                if(null!=upLoadPictureBean){
-
+                if(null!=upLoadPictureReturnBean){
+                    Message message = new Message();
+                    message.obj = upLoadPictureReturnBean;
+                    handler.sendMessage(message);
                 }
 
             }
@@ -319,6 +321,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            UpLoadPictureReturnBean upLoadPictureReturnBean = (UpLoadPictureReturnBean) msg.obj;
         }
     };
 

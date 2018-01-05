@@ -289,7 +289,7 @@ public class NewFriendListActivity extends BaseActivity implements NewFriendList
 
 
     private void agreeFriend(){
-        final AgreeFriendBean agreeFriendBean = new AgreeFriendBean();
+        AgreeFriendBean agreeFriendBean = new AgreeFriendBean();
         agreeFriendBean.setK("agree");
         agreeFriendBean.setM("friend");
         agreeFriendBean.setRid(String.valueOf(System.currentTimeMillis()));
@@ -301,7 +301,7 @@ public class NewFriendListActivity extends BaseActivity implements NewFriendList
             @Override
             public void returnJson(String json) {
                 AgreeFriendReturnBean agreeFriendReturnBean  = new Gson().fromJson(json,AgreeFriendReturnBean.class);
-                if(null!=agreeFriendBean){
+                if(null!=agreeFriendReturnBean){
                     Message message = new Message();
                     message.obj = agreeFriendReturnBean;
                     message.what = 1;

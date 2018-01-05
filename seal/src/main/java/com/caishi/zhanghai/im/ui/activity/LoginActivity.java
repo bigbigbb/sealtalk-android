@@ -186,19 +186,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
-    private void syncUserInfo(){
+    private void syncUserInfo() {
         GetUserInfoBean getUserInfoBean = new GetUserInfoBean();
         getUserInfoBean.setK("user_info");
         getUserInfoBean.setM("member");
         getUserInfoBean.setRid(String.valueOf(System.currentTimeMillis()));
-        GetUserInfoBean.VBean  vBean = new GetUserInfoBean.VBean();
+        GetUserInfoBean.VBean vBean = new GetUserInfoBean.VBean();
         vBean.setId(connectResultId);
         getUserInfoBean.setV(vBean);
-        String  msg = new Gson().toJson(getUserInfoBean);
+        String msg = new Gson().toJson(getUserInfoBean);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
-                GetUserInfoReturnBean getUserInfoReturnBean = new Gson().fromJson(json,GetUserInfoReturnBean.class);
+                GetUserInfoReturnBean getUserInfoReturnBean = new Gson().fromJson(json, GetUserInfoReturnBean.class);
                 Message message = new Message();
                 message.obj = getUserInfoReturnBean;
                 message.what = 1;
@@ -207,7 +207,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         });
 
     }
-
 
 
     private void login(final String mobile, final String pwd) {
@@ -220,25 +219,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         loginBean.setM("member");
         loginBean.setK("login_pass");
         loginBean.setRid(String.valueOf(System.currentTimeMillis()));
-        final String msg = new Gson().toJson(loginBean);
-        new Thread(new Runnable() {
+        String msg = new Gson().toJson(loginBean);
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
-            public void run() {
-                SocketClient.getInstance().sendMsg(msg, new CallBackJson() {
-                    @Override
-                    public void returnJson(String json) {
-                        Log.e("test", "json" + json);
-                        LoginReturnBean loginReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
-                        Message message = new Message();
-                        message.obj = loginReturnBean;
-                        message.what =0;
-                        handler.sendMessage(message);
+            public void returnJson(String json) {
+                Log.e("test", "json" + json);
+                LoginReturnBean loginReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
+                Message message = new Message();
+                message.obj = loginReturnBean;
+                message.what = 0;
+                handler.sendMessage(message);
 
 
-                    }
-                });
             }
-        }).start();
+        });
 
     }
 
@@ -246,7 +240,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
                     LoginReturnBean loginReturnBean = (LoginReturnBean) msg.obj;
                     Toast.makeText(getApplication(), loginReturnBean.getDesc(), Toast.LENGTH_LONG).show();
@@ -285,9 +279,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 case 1:
                     GetUserInfoReturnBean getUserInfoReturnBean = (GetUserInfoReturnBean) msg.obj;
                     GetUserInfoReturnBean.DataBean dataBean = getUserInfoReturnBean.getData();
-                    if(null!=dataBean){
-                        String  nickName = dataBean.getNickname();
-                        String  portraitUri = dataBean.getPortraitUri();
+                    if (null != dataBean) {
+                        String nickName = dataBean.getNickname();
+                        String portraitUri = dataBean.getPortraitUri();
                         editor.putString(SealConst.SEALTALK_LOGIN_NAME, nickName);
                         editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, portraitUri);
                         editor.apply();
@@ -306,21 +300,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
 
 
-            }
+        }
     };
 
-    private  void   getAllFriendShip(){
+    private void getAllFriendShip() {
         final FriendAllBean friendAllBean = new FriendAllBean();
         friendAllBean.setK("all");
         friendAllBean.setM("friend");
         friendAllBean.setRid(String.valueOf(System.currentTimeMillis()));
-         final String msg = new Gson().toJson(friendAllBean);
+        String msg = new Gson().toJson(friendAllBean);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
                 Log.e("msg1111", json);
                 FriendAllReturnBean friendAllReturnBean = new Gson().fromJson(json, FriendAllReturnBean.class);
-                if(null!=friendAllReturnBean){
+                if (null != friendAllReturnBean) {
                     Message message = new Message();
                     message.obj = friendAllReturnBean;
                     message.what = 2;
@@ -347,7 +341,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             String id = data.getStringExtra("id");
             String nickname = data.getStringExtra("nickname");
 //            if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(id) && !TextUtils.isEmpty(nickname)) {
-            if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(password) &&  !TextUtils.isEmpty(nickname)) {
+            if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(nickname)) {
                 mPhoneEdit.setText(phone);
                 mPasswordEdit.setText(password);
                 editor.putString(SealConst.SEALTALK_LOGING_PHONE, phone);

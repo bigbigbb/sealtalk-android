@@ -181,7 +181,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         vBean.setPassword(mPassword1.getText().toString().trim());
         vBean.setSms_code(mCode.getText().toString().trim());
         forgetPwdBean.setV(vBean);
-        final String msg = new Gson().toJson(forgetPwdBean);
+        String msg = new Gson().toJson(forgetPwdBean);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
