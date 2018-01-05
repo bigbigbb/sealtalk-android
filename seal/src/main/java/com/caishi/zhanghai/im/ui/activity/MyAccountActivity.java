@@ -10,12 +10,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.caishi.zhanghai.im.bean.UpLoadPictureBean;
+import com.caishi.zhanghai.im.bean.UpLoadPictureReturnBean;
 import com.caishi.zhanghai.im.net.CallBackJson;
 import com.caishi.zhanghai.im.net.SocketClient;
 import com.google.gson.Gson;
@@ -33,6 +37,7 @@ import com.qiniu.android.storage.UploadManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import com.caishi.zhanghai.im.App;
@@ -48,6 +53,7 @@ import com.caishi.zhanghai.im.server.utils.photo.PhotoUtils;
 import com.caishi.zhanghai.im.server.widget.BottomMenuDialog;
 import com.caishi.zhanghai.im.server.widget.LoadDialog;
 import com.caishi.zhanghai.im.server.widget.SelectableRoundedImageView;
+
 import io.rong.imageloader.core.ImageLoader;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.UserInfo;
@@ -108,11 +114,36 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
+    /* uri转化为bitmap */
+    private Bitmap getBitmapFromUri(Uri uri) {
+        try {
+// 读取uri所在的图片
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(
+                    this.getContentResolver(), uri);
+            return bitmap;
+        } catch (Exception e) {
+            Log.e("[Android]", e.getMessage());
+            Log.e("[Android]", "目录为：" + uri);
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String convertIconToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();// outputstream
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] appicon = baos.toByteArray();// 转为byte数组
+        return Base64.encodeToString(appicon, Base64.DEFAULT);
+    }
+
+    private String baseString;
+
     private void setPortraitChangeListener() {
         photoUtils = new PhotoUtils(new PhotoUtils.OnPhotoResultListener() {
             @Override
             public void onPhotoResult(Uri uri) {
                 if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
+                    baseString = convertIconToString(getBitmapFromUri(uri));
                     selectUri = uri;
                     LoadDialog.show(mContext);
                     request(GET_QI_NIU_TOKEN);
@@ -262,30 +293,35 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-    private void  uploadPicture(){
-        UpLoadPictureBean upLoadPictureBean = new UpLoadPictureBean();
+    private void uploadPicture() {
+        final UpLoadPictureBean upLoadPictureBean = new UpLoadPictureBean();
         upLoadPictureBean.setK("portrait");
         upLoadPictureBean.setM("member");
         upLoadPictureBean.setRid(String.valueOf(System.currentTimeMillis()));
         UpLoadPictureBean.VBean vBean = new UpLoadPictureBean.VBean();
-        vBean.setImgbase64(imageUrl);
+        vBean.setImgbase64(baseString);
         upLoadPictureBean.setV(vBean);
         String msg = new Gson().toJson(upLoadPictureBean);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
+                UpLoadPictureReturnBean upLoadPictureReturnBean = new UpLoadPictureReturnBean();
+                if(null!=upLoadPictureBean){
+
+                }
 
             }
         });
 
     }
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
         }
     };
+
     public void uploadImage(final String domain, String imageToken, Uri imagePath) {
         if (TextUtils.isEmpty(domain) && TextUtils.isEmpty(imageToken) && TextUtils.isEmpty(imagePath.toString())) {
             throw new RuntimeException("upload parameter is null!");
