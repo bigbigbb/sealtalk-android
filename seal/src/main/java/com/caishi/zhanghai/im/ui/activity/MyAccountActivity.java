@@ -146,7 +146,8 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
                     baseString = convertIconToString(getBitmapFromUri(uri));
                     selectUri = uri;
                     LoadDialog.show(mContext);
-                    request(GET_QI_NIU_TOKEN);
+//                    request(GET_QI_NIU_TOKEN);
+                    uploadPicture();
                 }
             }
 
@@ -299,13 +300,13 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         upLoadPictureBean.setM("member");
         upLoadPictureBean.setRid(String.valueOf(System.currentTimeMillis()));
         UpLoadPictureBean.VBean vBean = new UpLoadPictureBean.VBean();
-        vBean.setImgbase64("base64("+baseString+")");
+        vBean.setImgbase64(baseString);
         upLoadPictureBean.setV(vBean);
         String msg = new Gson().toJson(upLoadPictureBean);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
-                UpLoadPictureReturnBean upLoadPictureReturnBean = new UpLoadPictureReturnBean();
+                UpLoadPictureReturnBean upLoadPictureReturnBean = new Gson().fromJson(json,UpLoadPictureReturnBean.class);
                 if(null!=upLoadPictureReturnBean){
                     Message message = new Message();
                     message.obj = upLoadPictureReturnBean;
@@ -322,6 +323,19 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             UpLoadPictureReturnBean upLoadPictureReturnBean = (UpLoadPictureReturnBean) msg.obj;
+            if(upLoadPictureReturnBean.getV().equals("ok")){
+                String imageUrl = upLoadPictureReturnBean.getData().getPortraitUri();
+                    editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, imageUrl);
+                    editor.commit();
+                    ImageLoader.getInstance().displayImage(imageUrl, mImageView, App.getOptions());
+                    if (RongIM.getInstance() != null) {
+                        RongIM.getInstance().setCurrentUserInfo(new UserInfo(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""), sp.getString(SealConst.SEALTALK_LOGIN_NAME, ""), Uri.parse(imageUrl)));
+                    }
+                    BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.CHANGEINFO);
+                    NToast.shortToast(mContext, getString(R.string.portrait_update_success));
+
+                LoadDialog.dismiss(mContext);
+            }
         }
     };
 

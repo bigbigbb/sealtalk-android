@@ -244,6 +244,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 case 0:
                     LoginReturnBean loginReturnBean = (LoginReturnBean) msg.obj;
                     Toast.makeText(getApplication(), loginReturnBean.getDesc(), Toast.LENGTH_LONG).show();
+                    LoadDialog.dismiss(mContext);
                     if (loginReturnBean.getV().equals("ok")) {
                         if (null != loginReturnBean.getData()) {
                             loginToken = loginReturnBean.getData().getToken();

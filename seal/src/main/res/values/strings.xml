@@ -39,6 +39,8 @@
     <string name="friend_confirmation">加我好友时需要验证</string>
     <string name="the_blacklist">黑名单</string>
     <string name="join_the_blacklist">加入黑名单</string>
+    <string name="delete_friend">删除好友</string>
+    <string name="delete_friend_confirm">确定删除好友？</string>
     <string name="blacklist_empty">黑名单为空</string>
     <string name="portrait">头像</string>
     <string name="my_username">昵称</string>

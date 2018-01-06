@@ -64,6 +64,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/my_wallet"
         android:layout_width="match_parent"
         android:layout_height="45.5dp"
@@ -85,10 +86,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/mine_service"
         android:layout_width="match_parent"
         android:layout_height="45.5dp"
-        android:layout_marginTop="20dp"
+
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true">
 
@@ -160,6 +162,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
         android:id="@+id/mine_about"
         android:layout_width="match_parent"
         android:layout_height="45.5dp"

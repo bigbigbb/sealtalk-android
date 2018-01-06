@@ -25,7 +25,12 @@ import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealAppContext;
 import com.caishi.zhanghai.im.SealConst;
 import com.caishi.zhanghai.im.SealUserInfoManager;
+import com.caishi.zhanghai.im.bean.AgreeFriendBean;
+import com.caishi.zhanghai.im.bean.AgreeFriendReturnBean;
+import com.caishi.zhanghai.im.bean.BaseReturnBean;
 import com.caishi.zhanghai.im.db.Friend;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
 import com.caishi.zhanghai.im.server.network.http.HttpException;
 import com.caishi.zhanghai.im.server.pinyin.CharacterParser;
@@ -37,6 +42,7 @@ import com.caishi.zhanghai.im.server.utils.RongGenerate;
 import com.caishi.zhanghai.im.server.widget.DialogWithYesOrNoUtils;
 import com.caishi.zhanghai.im.server.widget.LoadDialog;
 import com.caishi.zhanghai.im.ui.widget.SinglePopWindow;
+import com.google.gson.Gson;
 
 //CallKit start 1
 import io.rong.callkit.RongCallAction;
@@ -48,6 +54,7 @@ import io.rong.calllib.RongCallSession;
 
 import io.rong.imageloader.core.ImageLoader;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.utilities.PromptPopupDialog;
 import io.rong.imlib.IRongCallback;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
@@ -226,6 +233,52 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
         }
         finish();
     }
+
+    public void deleteFriend(View view){
+
+        PromptPopupDialog.newInstance(this, this.getString(R.string.delete_friend),
+                this.getString(R.string.delete_friend_confirm)).setPromptButtonClickedListener(new PromptPopupDialog.OnPromptButtonClickedListener() {
+            @Override
+            public void onPositiveButtonClicked() {
+
+                AgreeFriendBean agreeFriendBean = new AgreeFriendBean();
+                agreeFriendBean.setK("delete");
+                agreeFriendBean.setM("friend");
+                agreeFriendBean.setRid(String.valueOf(System.currentTimeMillis()));
+                AgreeFriendBean.VBean vBean = new AgreeFriendBean.VBean();
+                vBean.setFriendId(mFriend.getUserId());
+                agreeFriendBean.setV(vBean);
+                String msg = new Gson().toJson(agreeFriendBean);
+                SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
+                    @Override
+                    public void returnJson(String json) {
+                        BaseReturnBean baseReturnBean  = new Gson().fromJson(json,BaseReturnBean.class);
+                        if(null!=baseReturnBean){
+                            Message message = new Message();
+                            message.obj = baseReturnBean;
+                            handler.sendMessage(message);
+                        }
+
+                    }
+                });
+
+            }
+        }).show();
+
+
+    }
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            BaseReturnBean baseReturnBean = (BaseReturnBean) msg.obj;
+            NToast.longToast(getApplication(),baseReturnBean.getDesc());
+            if(baseReturnBean.getV().equals("ok")){
+
+            }
+        }
+    };
 
     //CallKit start 2
     public void startVoice(View view) {

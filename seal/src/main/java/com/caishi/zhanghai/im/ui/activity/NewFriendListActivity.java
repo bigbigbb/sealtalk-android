@@ -114,30 +114,33 @@ public class NewFriendListActivity extends BaseActivity implements NewFriendList
                 case 0:
                     friendAllReturnBean  = (FriendAllReturnBean) msg.obj;
                     List<FriendAllReturnBean.DataBean>  dataBeanList  = friendAllReturnBean.getData();
-                    if (dataBeanList.size() == 0) {
-                        isData.setVisibility(View.VISIBLE);
-                        LoadDialog.dismiss(mContext);
-                        return;
+                    if(null!=dataBeanList){
+                        if (dataBeanList.size() == 0) {
+                            isData.setVisibility(View.VISIBLE);
+                            LoadDialog.dismiss(mContext);
+                            return;
+                        }
+
+                        Collections.sort(dataBeanList, new Comparator<FriendAllReturnBean.DataBean>() {
+
+                            @Override
+                            public int compare(FriendAllReturnBean.DataBean lhs,FriendAllReturnBean.DataBean rhs) {
+                                Date date1 = stringToDate(lhs);
+                                Date date2 = stringToDate(rhs);
+                                if (date1.before(date2)) {
+                                    return 1;
+                                }
+                                return -1;
+                            }
+                        });
+
+                        adapter.removeAll();
+                        adapter.addData(dataBeanList);
+
+                        adapter.notifyDataSetChanged();
+                        adapter.setOnItemButtonClick(NewFriendListActivity.this);
                     }
 
-                    Collections.sort(dataBeanList, new Comparator<FriendAllReturnBean.DataBean>() {
-
-                        @Override
-                        public int compare(FriendAllReturnBean.DataBean lhs,FriendAllReturnBean.DataBean rhs) {
-                            Date date1 = stringToDate(lhs);
-                            Date date2 = stringToDate(rhs);
-                            if (date1.before(date2)) {
-                                return 1;
-                            }
-                            return -1;
-                        }
-                    });
-
-                    adapter.removeAll();
-                    adapter.addData(dataBeanList);
-
-                    adapter.notifyDataSetChanged();
-                    adapter.setOnItemButtonClick(NewFriendListActivity.this);
                     LoadDialog.dismiss(mContext);
                     break;
                 case 1:

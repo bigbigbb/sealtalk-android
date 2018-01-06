@@ -116,6 +116,17 @@
             android:text="@string/start_chat"
             android:textColor="#FFF"
             android:textSize="16sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/contact_start_chat"
+            android:onClick="deleteFriend"
+            android:text="删除好友"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
 
         <!--CallKit start-->
         <Button

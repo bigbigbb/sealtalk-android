@@ -15,7 +15,7 @@
             android:layout_marginLeft="-50dp"
             android:layout_marginRight="-300dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/de_bg" />
+            android:src="@drawable/background" />
 
     </FrameLayout>
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="91dip"
-            android:src="@drawable/seal_logo" />
+            android:src="@drawable/login_logo" />
 
 
         <LinearLayout
@@ -138,6 +138,7 @@
         android:text="@string/forgot_password" />
 
     <TextView
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Powered by RongCloud"
