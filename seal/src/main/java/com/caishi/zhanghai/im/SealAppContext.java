@@ -31,6 +31,9 @@ import com.caishi.zhanghai.im.ui.activity.LoginActivity;
 import com.caishi.zhanghai.im.ui.activity.MainActivity;
 import com.caishi.zhanghai.im.ui.activity.NewFriendListActivity;
 import com.caishi.zhanghai.im.ui.activity.UserDetailActivity;
+import com.jrmf360.rylib.modules.JrmfExtensionModule;
+import com.jrmf360.rylib.rp.extend.JrmfRedPacketMessageProvider;
+
 import io.rong.calllib.RongCallClient;
 import io.rong.calllib.RongCallSession;
 import io.rong.imkit.DefaultExtensionModule;
@@ -168,8 +171,11 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
                 }
             }
             if (defaultModule != null) {
+                //隐藏红包功能
+                RongExtensionManager.getInstance().unregisterExtensionModule(moduleList.get(1));
                 RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-                RongExtensionManager.getInstance().registerExtensionModule(new SealExtensionModule());
+                SealExtensionModule sealExtensionModule  = new SealExtensionModule();
+                RongExtensionManager.getInstance().registerExtensionModule(sealExtensionModule);
             }
         }
     }

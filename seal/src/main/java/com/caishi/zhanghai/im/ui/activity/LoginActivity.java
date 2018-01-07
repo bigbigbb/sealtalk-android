@@ -305,7 +305,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     };
 
     private void getAllFriendShip() {
-        final FriendAllBean friendAllBean = new FriendAllBean();
+        FriendAllBean friendAllBean = new FriendAllBean();
         friendAllBean.setK("all");
         friendAllBean.setM("friend");
         friendAllBean.setRid(String.valueOf(System.currentTimeMillis()));

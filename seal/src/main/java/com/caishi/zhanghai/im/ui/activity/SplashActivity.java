@@ -44,6 +44,7 @@ public class SplashActivity extends Activity {
     private Context context;
     private android.os.Handler handler = new android.os.Handler();
     private SocketClient mSocketClient;
+    private String name,pwd;
 
 
     @Override
@@ -54,10 +55,10 @@ public class SplashActivity extends Activity {
         context = this;
         SharedPreferences sp = getSharedPreferences("config", MODE_PRIVATE);
         String cacheToken = sp.getString("loginToken", "");
-        String  name = sp.getString(SealConst.SEALTALK_LOGING_PHONE,"");
-        String  pwd = sp.getString(SealConst.SEALTALK_LOGING_PASSWORD,"");
+          name = sp.getString(SealConst.SEALTALK_LOGING_PHONE,"");
+          pwd = sp.getString(SealConst.SEALTALK_LOGING_PASSWORD,"");
 
-//        initSocketNet();
+        initSocketNet();
 //        if (!TextUtils.isEmpty(cacheToken)) {
 //            RongIM.connect(cacheToken, SealAppContext.getInstance().getConnectCallback());
 //            handler.postDelayed(new Runnable() {
@@ -75,28 +76,39 @@ public class SplashActivity extends Activity {
 //            }, 800);
 //        }
 
-        if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(pwd)) {
-            login(name,pwd);
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    goToMain();
-                }
-            }, 1000);
-        } else {
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    goToLogin();
-                }
-            }, 800);
-        }
+
 
 
 
 
     }
 
+    private void  initSocketNet(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GetUrlUtil.requestGet();
+                Looper.prepare();
+                if(null!= AppParm.IP&&null!=AppParm.PORT){
+                    mSocketClient = SocketClient.getInstance();
+                    mSocketClient.initSocket();
+                    if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(pwd)) {
+                        login(name,pwd);
+                    } else {
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                goToLogin();
+                            }
+                        }, 800);
+                    }
+                }
+                Looper.loop();
+            }
+        }).start();
+
+
+    }
     private void login(final String mobile, final String pwd) {
 
         LoginBean loginBean = new LoginBean();
@@ -108,11 +120,12 @@ public class SplashActivity extends Activity {
         loginBean.setK("login_pass");
         loginBean.setRid(String.valueOf(System.currentTimeMillis()));
 
-        final String msg = new Gson().toJson(loginBean);
+        String msg = new Gson().toJson(loginBean);
+        Log.e("msg000",msg);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
-                Log.e("test", "json" + json);
+                Log.e("test000", "json" + json);
                 LoginReturnBean loginReturnBean = new Gson().fromJson(json, LoginReturnBean.class);
                 Message message = new Message();
                 message.obj = loginReturnBean;
@@ -134,6 +147,7 @@ public class SplashActivity extends Activity {
                     if (loginReturnBean.getV().equals("ok")) {
                         if (null != loginReturnBean.getData()) {
                             RongIM.connect(loginReturnBean.getData().getToken(), SealAppContext.getInstance().getConnectCallback());
+                            goToMain();
                         }
                     }
                     break;

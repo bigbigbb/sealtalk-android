@@ -1,11 +1,16 @@
 package com.caishi.zhanghai.im.message.module;
 
+import com.jrmf360.rylib.rp.extend.JrmfRedPacketMessageProvider;
+import com.jrmf360.rylib.rp.extend.RedSingleEnvelopePlugin;
+
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.rong.imkit.DefaultExtensionModule;
+import io.rong.imkit.RongContext;
 import io.rong.imkit.RongExtension;
+import io.rong.imkit.RongIM;
 import io.rong.imkit.emoticon.IEmoticonTab;
 import io.rong.imkit.plugin.DefaultLocationPlugin;
 import io.rong.imkit.plugin.IPluginModule;
@@ -49,6 +54,7 @@ public class SealExtensionModule extends DefaultExtensionModule {
 
     @Override
     public List<IPluginModule> getPluginModules(Conversation.ConversationType conversationType) {
+        List<IPluginModule> pluginModulesT = super.getPluginModules(conversationType);
         if (conversationType.equals(Conversation.ConversationType.PUBLIC_SERVICE)) {
             List<IPluginModule> pluginModuleList = new ArrayList<>();
             IPluginModule image = new ImagePlugin();
@@ -63,6 +69,7 @@ public class SealExtensionModule extends DefaultExtensionModule {
                     Constructor<?> constructor = cls.getConstructor();
                     IPluginModule recognizer = (IPluginModule) constructor.newInstance();
                     pluginModuleList.add(recognizer);
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -79,6 +86,21 @@ public class SealExtensionModule extends DefaultExtensionModule {
                         }
                     }
                 }
+
+            }
+            return pluginModules;
+        }  else if (conversationType == Conversation.ConversationType.PRIVATE) {
+            List<IPluginModule> pluginModules = super.getPluginModules(conversationType);
+            if (conversationType == Conversation.ConversationType.PRIVATE) {
+                if (pluginModules != null) {
+                    for (IPluginModule module : pluginModules) {
+                        if (module instanceof RedSingleEnvelopePlugin) {
+                            pluginModules.remove(module);
+                            break;
+                        }
+                    }
+                }
+
             }
             return pluginModules;
         } else {

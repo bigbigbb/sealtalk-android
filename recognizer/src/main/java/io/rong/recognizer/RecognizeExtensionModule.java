@@ -42,6 +42,7 @@ public class RecognizeExtensionModule implements IExtensionModule {
         List<IPluginModule> pluginModules = new ArrayList<>();
         RecognizePlugin recognizePlugin = new RecognizePlugin();
         pluginModules.add(recognizePlugin);
+
         return pluginModules;
     }
 

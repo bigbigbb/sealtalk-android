@@ -3,6 +3,9 @@ package com.caishi.zhanghai.im.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -12,10 +15,17 @@ import java.io.File;
 
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealConst;
+import com.caishi.zhanghai.im.bean.BaseReturnBean;
+import com.caishi.zhanghai.im.bean.FriendAllBean;
+import com.caishi.zhanghai.im.bean.FriendAllReturnBean;
+import com.caishi.zhanghai.im.net.CallBackJson;
+import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
 import com.caishi.zhanghai.im.server.utils.NToast;
 import com.caishi.zhanghai.im.server.widget.DialogWithYesOrNoUtils;
 import com.caishi.zhanghai.im.ui.widget.switchbutton.SwitchButton;
+import com.google.gson.Gson;
+
 import io.rong.common.RLog;
 import io.rong.imlib.RongIMClient;
 
@@ -140,7 +150,7 @@ public class AccountSettingActivity extends BaseActivity implements View.OnClick
                 DialogWithYesOrNoUtils.getInstance().showDialog(mContext, "是否退出登录?", new DialogWithYesOrNoUtils.DialogCallBack() {
                     @Override
                     public void executeEvent() {
-                        BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.EXIT);
+                      logout();
                     }
 
                     @Override
@@ -156,6 +166,40 @@ public class AccountSettingActivity extends BaseActivity implements View.OnClick
                 break;
         }
     }
+
+    private void logout(){
+        FriendAllBean friendAllBean = new FriendAllBean();
+        friendAllBean.setK("logout");
+        friendAllBean.setM("member");
+        friendAllBean.setRid(String.valueOf(System.currentTimeMillis()));
+        String msg = new Gson().toJson(friendAllBean);
+        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
+            @Override
+            public void returnJson(String json) {
+                Log.e("msg1111", json);
+                BaseReturnBean baseReturnBean = new Gson().fromJson(json, BaseReturnBean.class);
+                if (null != baseReturnBean) {
+                    Message message = new Message();
+                    message.obj = baseReturnBean;
+                    handler.sendMessage(message);
+                }
+
+
+            }
+        });
+    }
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            BaseReturnBean baseReturnBean   =  (BaseReturnBean) msg.obj;
+            NToast.longToast(getApplication(),baseReturnBean.getDesc());
+            if(baseReturnBean.getV().equals("ok")){
+                BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.EXIT);
+            }
+        }
+    };
 
 
     public void deleteFile(File file) {

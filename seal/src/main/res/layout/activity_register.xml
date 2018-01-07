@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="61dip"
-            android:src="@drawable/seal_logo" />
+            android:src="@drawable/login_logo" />
 
         <com.caishi.zhanghai.im.server.widget.ClearWriteEditText
             android:id="@+id/reg_username"

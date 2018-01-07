@@ -70,7 +70,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
     private PhotoUtils photoUtils;
     private BottomMenuDialog dialog;
     private UploadManager uploadManager;
-    private String imageUrl;
+//    private String imageUrl;
     private Uri selectUri;
 
 
@@ -181,7 +181,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
     public Object doInBackground(int requestCode, String id) throws HttpException {
         switch (requestCode) {
             case UP_LOAD_PORTRAIT:
-                return action.setPortrait(imageUrl);
+//                return action.setPortrait(imageUrl);
             case GET_QI_NIU_TOKEN:
                 return action.getQiNiuToken();
         }
@@ -194,17 +194,17 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
             switch (requestCode) {
                 case UP_LOAD_PORTRAIT:
                     SetPortraitResponse spRes = (SetPortraitResponse) result;
-                    if (spRes.getCode() == 200) {
-                        editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, imageUrl);
-                        editor.commit();
-                        ImageLoader.getInstance().displayImage(imageUrl, mImageView, App.getOptions());
-                        if (RongIM.getInstance() != null) {
-                            RongIM.getInstance().setCurrentUserInfo(new UserInfo(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""), sp.getString(SealConst.SEALTALK_LOGIN_NAME, ""), Uri.parse(imageUrl)));
-                        }
-                        BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.CHANGEINFO);
-                        NToast.shortToast(mContext, getString(R.string.portrait_update_success));
-                    }
-                    LoadDialog.dismiss(mContext);
+//                    if (spRes.getCode() == 200) {
+//                        editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, imageUrl);
+//                        editor.commit();
+//                        ImageLoader.getInstance().displayImage(imageUrl, mImageView, App.getOptions());
+//                        if (RongIM.getInstance() != null) {
+//                            RongIM.getInstance().setCurrentUserInfo(new UserInfo(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""), sp.getString(SealConst.SEALTALK_LOGIN_NAME, ""), Uri.parse(imageUrl)));
+//                        }
+//                        BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.CHANGEINFO);
+//                        NToast.shortToast(mContext, getString(R.string.portrait_update_success));
+//                    }
+//                    LoadDialog.dismiss(mContext);
                     break;
                 case GET_QI_NIU_TOKEN:
                     QiNiuTokenResponse response = (QiNiuTokenResponse) result;
@@ -355,11 +355,11 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
                 if (responseInfo.isOK()) {
                     try {
                         String key = (String) jsonObject.get("key");
-                        imageUrl = "http://" + domain + "/" + key;
-                        Log.e("uploadImage", imageUrl);
-                        if (!TextUtils.isEmpty(imageUrl)) {
-                            request(UP_LOAD_PORTRAIT);
-                        }
+//                        imageUrl = "http://" + domain + "/" + key;
+//                        Log.e("uploadImage", imageUrl);
+//                        if (!TextUtils.isEmpty(imageUrl)) {
+//                            request(UP_LOAD_PORTRAIT);
+//                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
