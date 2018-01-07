@@ -365,7 +365,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onTick(long millisUntilFinished) {
-        mGetCode.setText("seconds:" + String.valueOf(millisUntilFinished / 1000));
+        mGetCode.setText(String.valueOf(millisUntilFinished / 1000)+"秒后发送");
         mGetCode.setClickable(false);
         mGetCode.setBackgroundDrawable(getResources().getDrawable(R.drawable.rs_select_btn_gray));
     }
