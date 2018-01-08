@@ -1,10 +1,19 @@
 package com.caishi.zhanghai.im.net;
 
+import android.os.Handler;
+import android.os.Message;
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.caishi.zhanghai.im.SealAppContext;
+import com.caishi.zhanghai.im.SealConst;
 import com.caishi.zhanghai.im.bean.AuthBean;
 import com.caishi.zhanghai.im.bean.HeartBean;
+import com.caishi.zhanghai.im.bean.LoginBean;
+import com.caishi.zhanghai.im.bean.LoginReturnBean;
+import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
 import com.caishi.zhanghai.im.utils.MD5;
 import com.google.gson.Gson;
 
@@ -15,6 +24,8 @@ import java.lang.ref.WeakReference;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Arrays;
+
+import io.rong.imkit.RongIM;
 
 import static android.content.ContentValues.TAG;
 
@@ -38,8 +49,10 @@ public class SocketClient{
 
     }
 
-    public void initSocket(){
+    private Context mContext;
+    public void initSocket(Context context){
         try {
+            this.mContext = context;
             Socket so = new Socket(AppParm.IP, Integer.parseInt(AppParm.PORT));
             mSocket = new WeakReference<Socket>(so);
             mReadThread = new ReadThread(so);
@@ -92,6 +105,9 @@ public class SocketClient{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else {
+            releaseLastSocket(mSocket);
+            BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
         }
 
     }
@@ -124,6 +140,9 @@ public class SocketClient{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else {
+            releaseLastSocket(mSocket);
+            BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
         }
 
     }
@@ -131,7 +150,7 @@ public class SocketClient{
         @Override
         public void run() {
             super.run();
-            initSocket();
+//            initSocket();
         }
     }
     public void releaseLastSocket(WeakReference<Socket> mSocket) {
@@ -176,7 +195,6 @@ public class SocketClient{
                             String message = new String(Arrays.copyOf(buffer,
                                     length)).trim();
                             Log.e(TAG, message);
-
                             if(!TextUtils.isEmpty(message)&&message.equals("{\"rid\":\"0\",\"m\":\"system\",\"k\":\"ping\",\"v\":\"\"}")){
                                 Log.e("test","收到心跳检测");
                                 sendMsg(initHeartData());
@@ -185,27 +203,16 @@ public class SocketClient{
                                 mClassBack.returnJson(message);
 
                             }
-
-                            //收到服务器过来的消息，就通过Broadcast发送出去
-//                            if (message.equals(HEART_BEAT_STRING)) {//处理心跳回复
-//                                Intent intent = new Intent(HEART_BEAT_ACTION);
-//                                mLocalBroadcastManager.sendBroadcast(intent);
-//                            } else {
-                            //其他消息回复
-//                                Intent intent = new Intent(MESSAGE_ACTION);
-//                                intent.putExtra("message", message);
-//                                mLocalBroadcastManager.sendBroadcast(intent);
                         }
                     }
-//                }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+
         }
 
     }
-
 
 
 }

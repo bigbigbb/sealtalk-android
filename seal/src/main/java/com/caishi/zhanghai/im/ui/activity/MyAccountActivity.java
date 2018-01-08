@@ -70,7 +70,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
     private PhotoUtils photoUtils;
     private BottomMenuDialog dialog;
     private UploadManager uploadManager;
-//    private String imageUrl;
+    //    private String imageUrl;
     private Uri selectUri;
 
 
@@ -117,7 +117,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
     /* uri转化为bitmap */
     private Bitmap getBitmapFromUri(Uri uri) {
         try {
-// 读取uri所在的图片
+           // 读取uri所在的图片
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(
                     this.getContentResolver(), uri);
             return bitmap;
@@ -229,6 +229,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
     }
 
     static public final int REQUEST_CODE_ASK_PERMISSIONS = 101;
+    static public final int REQUEST_CODE_ASK_PERMISSIONS1 = 102;
 
     /**
      * 弹出底部框
@@ -275,6 +276,26 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
+                if (Build.VERSION.SDK_INT >= 23) {
+                    int checkPermission = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    if (checkPermission != PackageManager.PERMISSION_GRANTED) {
+                        if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_ASK_PERMISSIONS1);
+                        } else {
+                            new AlertDialog.Builder(mContext)
+                                    .setMessage("您需要在设置里打开文件读写权限")
+                                    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_ASK_PERMISSIONS1);
+                                        }
+                                    })
+                                    .setNegativeButton("取消", null)
+                                    .create().show();
+                        }
+                        return;
+                    }
+                }
                 photoUtils.selectPicture(MyAccountActivity.this);
             }
         });
@@ -306,8 +327,8 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
-                UpLoadPictureReturnBean upLoadPictureReturnBean = new Gson().fromJson(json,UpLoadPictureReturnBean.class);
-                if(null!=upLoadPictureReturnBean){
+                UpLoadPictureReturnBean upLoadPictureReturnBean = new Gson().fromJson(json, UpLoadPictureReturnBean.class);
+                if (null != upLoadPictureReturnBean) {
                     Message message = new Message();
                     message.obj = upLoadPictureReturnBean;
                     handler.sendMessage(message);
@@ -323,16 +344,16 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             UpLoadPictureReturnBean upLoadPictureReturnBean = (UpLoadPictureReturnBean) msg.obj;
-            if(upLoadPictureReturnBean.getV().equals("ok")){
+            if (upLoadPictureReturnBean.getV().equals("ok")) {
                 String imageUrl = upLoadPictureReturnBean.getData().getPortraitUri();
-                    editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, imageUrl);
-                    editor.commit();
-                    ImageLoader.getInstance().displayImage(imageUrl, mImageView, App.getOptions());
-                    if (RongIM.getInstance() != null) {
-                        RongIM.getInstance().setCurrentUserInfo(new UserInfo(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""), sp.getString(SealConst.SEALTALK_LOGIN_NAME, ""), Uri.parse(imageUrl)));
-                    }
-                    BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.CHANGEINFO);
-                    NToast.shortToast(mContext, getString(R.string.portrait_update_success));
+                editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, imageUrl);
+                editor.commit();
+                ImageLoader.getInstance().displayImage(imageUrl, mImageView, App.getOptions());
+                if (RongIM.getInstance() != null) {
+                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""), sp.getString(SealConst.SEALTALK_LOGIN_NAME, ""), Uri.parse(imageUrl)));
+                }
+                BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.CHANGEINFO);
+                NToast.shortToast(mContext, getString(R.string.portrait_update_success));
 
                 LoadDialog.dismiss(mContext);
             }

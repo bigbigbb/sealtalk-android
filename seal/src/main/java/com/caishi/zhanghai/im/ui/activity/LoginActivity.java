@@ -120,10 +120,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String oldPhone = sp.getString(SealConst.SEALTALK_LOGING_PHONE, "");
         String oldPassword = sp.getString(SealConst.SEALTALK_LOGING_PASSWORD, "");
 
-        if (!TextUtils.isEmpty(oldPhone) && !TextUtils.isEmpty(oldPassword)) {
+        if (!TextUtils.isEmpty(oldPhone)) {
             mPhoneEdit.setText(oldPhone);
+
+        }  if (!TextUtils.isEmpty(oldPassword)) {
             mPasswordEdit.setText(oldPassword);
         }
+
 
         if (getIntent().getBooleanExtra("kickedByOtherClient", false)) {
             final AlertDialog dlg = new AlertDialog.Builder(LoginActivity.this).create();

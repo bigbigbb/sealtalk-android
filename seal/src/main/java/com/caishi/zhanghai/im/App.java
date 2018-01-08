@@ -189,7 +189,7 @@ public class App extends MultiDexApplication {
                 Looper.prepare();
                 if(null!= AppParm.IP&&null!=AppParm.PORT){
                     mSocketClient = SocketClient.getInstance();
-                    mSocketClient.initSocket();
+                    mSocketClient.initSocket(getApplicationContext());
                 }
                 Looper.loop();
             }

@@ -1,6 +1,7 @@
 package com.caishi.zhanghai.im.ui.activity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +28,7 @@ import com.caishi.zhanghai.im.net.AppParm;
 import com.caishi.zhanghai.im.net.CallBackJson;
 import com.caishi.zhanghai.im.net.GetUrlUtil;
 import com.caishi.zhanghai.im.net.SocketClient;
+import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
 import com.caishi.zhanghai.im.server.utils.NLog;
 import com.caishi.zhanghai.im.utils.MD5;
 import com.google.gson.Gson;
@@ -45,6 +47,7 @@ public class SplashActivity extends Activity {
     private android.os.Handler handler = new android.os.Handler();
     private SocketClient mSocketClient;
     private String name,pwd;
+    private boolean isFrom = true;
 
 
     @Override
@@ -58,6 +61,15 @@ public class SplashActivity extends Activity {
           name = sp.getString(SealConst.SEALTALK_LOGING_PHONE,"");
           pwd = sp.getString(SealConst.SEALTALK_LOGING_PASSWORD,"");
 
+
+          isFrom = true;
+        BroadcastManager.getInstance(getApplication()).addAction(SealConst.BREAK_UP, new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                isFrom = false;
+                initSocketNet();
+            }
+        });
         initSocketNet();
 //        if (!TextUtils.isEmpty(cacheToken)) {
 //            RongIM.connect(cacheToken, SealAppContext.getInstance().getConnectCallback());
@@ -83,7 +95,7 @@ public class SplashActivity extends Activity {
 
     }
 
-    private void  initSocketNet(){
+    public void  initSocketNet(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -91,7 +103,7 @@ public class SplashActivity extends Activity {
                 Looper.prepare();
                 if(null!= AppParm.IP&&null!=AppParm.PORT){
                     mSocketClient = SocketClient.getInstance();
-                    mSocketClient.initSocket();
+                    mSocketClient.initSocket(getApplication());
                     if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(pwd)) {
                         login(name,pwd);
                     } else {
@@ -147,7 +159,10 @@ public class SplashActivity extends Activity {
                     if (loginReturnBean.getV().equals("ok")) {
                         if (null != loginReturnBean.getData()) {
                             RongIM.connect(loginReturnBean.getData().getToken(), SealAppContext.getInstance().getConnectCallback());
-                            goToMain();
+                            if(isFrom){
+                                goToMain();
+                            }
+
                         }
                     }
                     break;

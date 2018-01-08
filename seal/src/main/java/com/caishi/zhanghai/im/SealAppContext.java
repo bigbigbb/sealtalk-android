@@ -147,7 +147,9 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
                 quit(false);
             }
         });
+
     }
+
 
     private void setReadReceiptConversationType() {
         Conversation.ConversationType[] types = new Conversation.ConversationType[]{
@@ -588,8 +590,7 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
         }
         editor.putString("loginToken", "");
         editor.putString(SealConst.SEALTALK_LOGIN_ID, "");
-        editor.putString(SealConst.SEALTALK_LOGING_PHONE,"");
-        editor.putString(SealConst.SEALTALK_LOGING_PHONE,"");
+        editor.putString(SealConst.SEALTALK_LOGING_PASSWORD,"");
         editor.putInt("getAllUserInfoState", 0);
         editor.apply();
         /*//这些数据清除操作之前一直是在login界面,因为app的数据库改为按照userID存储,退出登录时先直接删除
