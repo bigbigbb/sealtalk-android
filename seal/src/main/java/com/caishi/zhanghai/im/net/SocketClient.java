@@ -1,6 +1,8 @@
 package com.caishi.zhanghai.im.net;
 
+import android.net.ConnectivityManager;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.content.Context;
 import android.text.TextUtils;
@@ -14,6 +16,7 @@ import com.caishi.zhanghai.im.bean.HeartBean;
 import com.caishi.zhanghai.im.bean.LoginBean;
 import com.caishi.zhanghai.im.bean.LoginReturnBean;
 import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
+import com.caishi.zhanghai.im.server.utils.NToast;
 import com.caishi.zhanghai.im.utils.MD5;
 import com.google.gson.Gson;
 
@@ -105,9 +108,6 @@ public class SocketClient{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else {
-            releaseLastSocket(mSocket);
-            BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
         }
 
     }
@@ -120,30 +120,51 @@ public class SocketClient{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                sendMsg(msg,classBack);
+                ConnectivityManager connectivityManager =  (ConnectivityManager) mContext
+                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (connectivityManager.getActiveNetworkInfo() != null) {
+                    sendMsg(msg,classBack);
+                }else {
+                    Looper.prepare();
+                    Toast.makeText(mContext,"网络请求失败，请检查您的网络设置",Toast.LENGTH_LONG).show();
+                    Looper.loop();
+                }
+
             }
         }).start();
     }
 
 
     public void sendMsg(String msg) {
-        mClassBack = null;
-        if (null != mSocket && null != mSocket.get()) {
-            Socket soc = mSocket.get();
-            try {
-                if (!soc.isClosed() && !soc.isOutputShutdown()) {
-                    OutputStream os = soc.getOutputStream();
-                    String message = msg+"$~ZHANGHAI-END-POINT~$";
-                    os.write(message.getBytes());
-                    os.flush();
+        ConnectivityManager connectivityManager =  (ConnectivityManager) mContext
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getActiveNetworkInfo() != null) {
+            mClassBack = null;
+            if (null != mSocket && null != mSocket.get()) {
+                Socket soc = mSocket.get();
+                try {
+                    if (!soc.isClosed() && !soc.isOutputShutdown()) {
+                        OutputStream os = soc.getOutputStream();
+                        String message = msg+"$~ZHANGHAI-END-POINT~$";
+                        os.write(message.getBytes());
+                        os.flush();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }else {
-            releaseLastSocket(mSocket);
-            BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    Looper.prepare();
+                    Toast.makeText(mContext,"网络请求失败，请检查您的网络设置",Toast.LENGTH_LONG).show();
+                    Looper.loop();
+                }
+            }).start();
         }
+
 
     }
     class InitSocketThread extends Thread {
@@ -185,10 +206,13 @@ public class SocketClient{
             super.run();
             Socket socket = mWeakSocket.get();
             if (null != socket) {
+                Log.e("test","会进来嘛？");
                 try {
                     InputStream is = socket.getInputStream();
                     byte[] buffer = new byte[1024 * 4];
                     int length = 0;
+
+
                     while (!socket.isClosed() && !socket.isInputShutdown()
                             && isStart && ((length = is.read(buffer)) != -1)) {
                         if (length > 0) {
@@ -205,8 +229,14 @@ public class SocketClient{
                             }
                         }
                     }
+                    Log.e("test","断了");
+                    releaseLastSocket(mSocket);
+                    BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    Log.e("test","断了");
+                    releaseLastSocket(mSocket);
+                    BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
                 }
             }
 

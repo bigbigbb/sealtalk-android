@@ -110,7 +110,10 @@ public class SplashActivity extends Activity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                goToLogin();
+                                if(isFrom){
+                                    goToLogin();
+                                }
+
                             }
                         }, 800);
                     }
