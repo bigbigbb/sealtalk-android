@@ -8,7 +8,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,8 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.jrmf360.rylib.JrmfClient;
 
 import com.caishi.zhanghai.im.App;
 import com.caishi.zhanghai.im.R;
@@ -34,6 +31,8 @@ import com.caishi.zhanghai.im.server.widget.SelectableRoundedImageView;
 import com.caishi.zhanghai.im.ui.activity.AboutRongCloudActivity;
 import com.caishi.zhanghai.im.ui.activity.AccountSettingActivity;
 import com.caishi.zhanghai.im.ui.activity.MyAccountActivity;
+import com.jrmf360.rylib.JrmfClient;
+
 import io.rong.imageloader.core.ImageLoader;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.CSCustomServiceInfo;
@@ -54,7 +53,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private String url;
     private boolean isDebug;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.seal_mine_fragment, container, false);

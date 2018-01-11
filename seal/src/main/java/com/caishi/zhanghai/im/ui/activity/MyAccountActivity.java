@@ -118,8 +118,8 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
     private Bitmap getBitmapFromUri(Uri uri) {
         try {
            // 读取uri所在的图片
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                    this.getContentResolver(), uri);
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+            Log.e("[Android]", "成功获取图片");
             return bitmap;
         } catch (Exception e) {
             Log.e("[Android]", e.getMessage());
@@ -131,7 +131,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
 
     public static String convertIconToString(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();// outputstream
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] appicon = baos.toByteArray();// 转为byte数组
         return Base64.encodeToString(appicon, Base64.DEFAULT);
     }
@@ -142,6 +142,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         photoUtils = new PhotoUtils(new PhotoUtils.OnPhotoResultListener() {
             @Override
             public void onPhotoResult(Uri uri) {
+                Log.e("[Android]", uri.getPath());
                 if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
                     baseString = convertIconToString(getBitmapFromUri(uri));
                     selectUri = uri;
@@ -324,6 +325,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         vBean.setImgbase64(baseString);
         upLoadPictureBean.setV(vBean);
         String msg = new Gson().toJson(upLoadPictureBean);
+        Log.e("[Android]", "上传的数据："+msg);
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
@@ -344,6 +346,9 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             UpLoadPictureReturnBean upLoadPictureReturnBean = (UpLoadPictureReturnBean) msg.obj;
+
+            Log.e("[Android]",upLoadPictureReturnBean.getV());
+
             if (upLoadPictureReturnBean.getV().equals("ok")) {
                 String imageUrl = upLoadPictureReturnBean.getData().getPortraitUri();
                 editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, imageUrl);

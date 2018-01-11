@@ -6,46 +6,18 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="[Android]" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c189d84c-de23-4bf4-a0ac-a606b6afd421" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_CallLib_libs_CallEngine_Agora_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_CallLib_libs_Rong_CallLib_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_CallLib_libs_agora_rtc_sdk_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_IMKit_src_main_libs_Rong_IMKit_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_IMLib_libs_Rong_IMLib_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_RedPacket_libs_alipaySingle_20170510_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_RedPacket_libs_jrmfry_1_5_0_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_recognizer_libs_Msc_1_0_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_AMap_2DMap_V2_9_0_20160525_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_AMap_Channel_Location_V1_4_0_20160708_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_AMap_Search_V3_4_0_20160811_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_MiPush_SDK_Client_3_2_2_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_fastjson_1_2_5_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_greendao_1_3_7_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_happy_dns_0_2_3_2_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_jsoup_1_8_3_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_okhttp_2_7_0_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_okio_1_6_0_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_org_apache_http_legacy_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_qiniu_android_sdk_7_1_0_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_seal_libs_umeng_analytics_v5_2_4_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/__local_jars___E__as_workspace_zhanghai_android_sticker_libs_BQMMRongCloudPlugin_v1_0_6_jar_unspecified_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_android_23.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CallKit/CallKit.iml" afterPath="$PROJECT_DIR$/CallKit/CallKit.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CallLib/CallLib.iml" afterPath="$PROJECT_DIR$/CallLib/CallLib.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IMKit/IMKit.iml" afterPath="$PROJECT_DIR$/IMKit/IMKit.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IMLib/IMLib.iml" afterPath="$PROJECT_DIR$/IMLib/IMLib.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RedPacket/RedPacket.iml" afterPath="$PROJECT_DIR$/RedPacket/RedPacket.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contactcard/contactcard.iml" afterPath="$PROJECT_DIR$/contactcard/contactcard.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/recognizer/recognizer.iml" afterPath="$PROJECT_DIR$/recognizer/recognizer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/seal.iml" afterPath="$PROJECT_DIR$/seal/seal.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java" afterPath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/SplashActivity.java" afterPath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/SplashActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sticker/sticker.iml" afterPath="$PROJECT_DIR$/sticker/sticker.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/BlackListActivity.java" afterPath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/BlackListActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java" afterPath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/fragment/MineFragment.java" afterPath="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/fragment/MineFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/seal/src/main/res/layout/seal_mine_fragment.xml" afterPath="$PROJECT_DIR$/seal/src/main/res/layout/seal_mine_fragment.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/contactcard/build/intermediates/annotations/" />
     <ignored path="$PROJECT_DIR$/contactcard/build/intermediates/blame/" />
@@ -215,32 +187,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SplashActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/SplashActivity.java">
+      <file leaf-file-name="MineFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/fragment/MineFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="23" column="57" lean-forward="false" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
-              <folding />
+            <state relative-caret-position="141">
+              <caret line="140" column="62" lean-forward="false" selection-start-line="140" selection-start-column="62" selection-end-line="140" selection-end-column="62" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/seal/src/main/res/values/strings.xml">
+      <file leaf-file-name="MyAccountActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="17" column="49" lean-forward="false" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SearchFriendActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/SearchFriendActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4070">
-              <caret line="227" column="16" lean-forward="false" selection-start-line="227" selection-start-column="16" selection-end-line="227" selection-end-column="16" />
-              <folding />
+            <state relative-caret-position="448">
+              <caret line="331" column="44" lean-forward="false" selection-start-line="331" selection-start-column="44" selection-end-line="331" selection-end-column="44" />
+              <folding>
+                <element signature="e#13574#14050#0" expanded="true" />
+                <element signature="e#14049#14050#0" expanded="true" />
+                <element signature="e#14091#15252#0" expanded="true" />
+                <element signature="e#15130#15173#0" expanded="true" />
+                <element signature="e#15251#15252#0" expanded="true" />
+                <marker date="1515684966835" expanded="false" signature="7970:8013" ph="&quot;头像更新成功&quot;" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -248,45 +219,22 @@
       <file leaf-file-name="SocketClient.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4708">
-              <caret line="216" column="65" lean-forward="false" selection-start-line="216" selection-start-column="65" selection-end-line="216" selection-end-column="65" />
+            <state relative-caret-position="275">
+              <caret line="215" column="55" lean-forward="false" selection-start-line="215" selection-start-column="55" selection-end-line="215" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4896#4897#0" expanded="true" />
-                <element signature="e#4967#4968#0" expanded="true" />
+                <element signature="e#6063#6064#0" expanded="true" />
+                <element signature="e#6134#6135#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/LoginActivity.java">
+      <file leaf-file-name="ContentValues.class" pinned="false" current-in-tab="false">
+        <entry file="jar://E:/SDK/platforms/android-23/android.jar!/android/content/ContentValues.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3630">
-              <caret line="216" column="0" lean-forward="false" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BroadcastManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/server/broadcast/BroadcastManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1562">
-              <caret line="85" column="70" lean-forward="false" selection-start-line="85" selection-start-column="70" selection-end-line="85" selection-end-column="70" />
-              <folding>
-                <element signature="e#2623#2624#0" expanded="true" />
-                <element signature="e#2664#2665#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppParm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/AppParm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="26" lean-forward="false" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+            <state relative-caret-position="176">
+              <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -305,36 +253,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>RongRedPacketMessage</find>
-      <find>PRIVATE</find>
-      <find>RongExtension</find>
-      <find>getExtensionModules</find>
-      <find>RedSingleEnvelopePlugin</find>
-      <find>FilePlugin</find>
-      <find>RecognizeExtensionModule</find>
-      <find>List&lt;IPluginModule&gt; pluginModules = super.getPluginModules(conversationType);</find>
-      <find>RongExtensionManager</find>
-      <find>退出</find>
-      <find>退出登录</find>
-      <find>SealConst.EXIT</find>
-      <find>S</find>
-      <find>registerExtensionModule</find>
-      <find>Spl</find>
-      <find>忘记</find>
-      <find>忘记迷</find>
-      <find>BREAK_UP</find>
-      <find>ReadaThred</find>
-      <find>ReadThread</find>
-      <find>isStart</find>
-      <find>\n</find>
-      <find>SealConst.BREAK_UP</find>
-      <find>天假好</find>
-      <find>天假</find>
-      <find>天</find>
-      <find>添加</find>
-      <find>添加好友</find>
       <find>add_contacts</find>
       <find>receiverMap</find>
+      <find>mViewPager</find>
+      <find>rl_my_portrait</find>
+      <find>photographBtn</find>
+      <find>setConfirmListener</find>
+      <find>REQUEST_CODE_ASK_PERMISSIONS</find>
+      <find>confirmListener</find>
+      <find>takePicture</find>
+      <find>onActivityResult</find>
+      <find>buildUri</find>
+      <find>onPhotoCancel</find>
+      <find>INTENT_TAKE</find>
+      <find>handler</find>
+      <find>onPhotoResultListener</find>
+      <find>onPhotoResult</find>
+      <find>setPortraitChangeListener</find>
+      <find>baseString</find>
+      <find>convertIconToString</find>
+      <find>upLoadPictureReturnBean</find>
+      <find>getBitmapFromUri</find>
+      <find>onPhotoResultListener.onPhotoResult</find>
+      <find>classBack</find>
+      <find>mClassBack</find>
+      <find>ReadThread</find>
+      <find>length</find>
+      <find>INTENT_CROP</find>
+      <find>uploadPicture</find>
+      <find>start_user_profile</find>
+      <find>msg1111</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -8221,7 +8169,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/bean/GetUserInfoBean.java" />
         <option value="$PROJECT_DIR$/IMKit/src/main/libs/Rong_IMKit.jar!/io/rong/imkit/fragment/ConversationListFragment.class" />
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/bean/SetNickNameBean.java" />
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/bean/SetNickNameReturnBean.java" />
@@ -8246,7 +8193,6 @@
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/bean/BlackReturnBean.java" />
         <option value="$PROJECT_DIR$/seal/src/main/res/layout/popupwindow_black.xml" />
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/widget/SinglePopWindow.java" />
-        <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/BlackListActivity.java" />
         <option value="$PROJECT_DIR$/seal/src/main/res/layout/activity_user_detail.xml" />
         <option value="$PROJECT_DIR$/seal/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/UserDetailActivity.java" />
@@ -8259,7 +8205,6 @@
         <option value="$PROJECT_DIR$/seal/src/main/res/layout/seal_mine_fragment.xml" />
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/LoginActivity.java" />
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/AccountSettingActivity.java" />
-        <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java" />
         <option value="$PROJECT_DIR$/seal/src/main/res/layout/activity_register.xml" />
         <option value="$PROJECT_DIR$/IMKit/src/main/res/layout/rc_ext_plugin_grid_view.xml" />
         <option value="$PROJECT_DIR$/seal/build/intermediates/exploded-aar/zhanghai-android/RedPacket/unspecified/res/values/values.xml" />
@@ -8270,8 +8215,11 @@
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/SealUserInfoManager.java" />
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/SealAppContext.java" />
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/ForgetPasswordActivity.java" />
-        <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java" />
         <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/SplashActivity.java" />
+        <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/fragment/MineFragment.java" />
+        <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java" />
+        <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/BlackListActivity.java" />
+        <option value="$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java" />
       </list>
     </option>
   </component>
@@ -8307,60 +8255,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zhanghai-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zhanghai-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RedPacket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zhanghai-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zhanghai-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RedPacket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zhanghai-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zhanghai-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RedPacket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -8383,7 +8277,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="2.2.2" />
     <property name="device.picker.selection" value="98891a443056574352" />
     <property name="DEBUGGABLE_DEVICE" value="samsung-sm_g9500-98891a443056574352" />
@@ -8487,7 +8381,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515675800286" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515684967280" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -8535,7 +8429,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515675800286" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515684967281" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -8567,6 +8461,27 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -8697,7 +8612,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515675800286" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515684967283" />
       </method>
     </configuration>
     <list size="1">
@@ -8801,37 +8716,37 @@
     <frame x="-8" y="0" width="1936" height="1038" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15792291" sideWeight="0.36749116" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23615819" sideWeight="0.3559957" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.004519774" sideWeight="0.8763383" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03502825" sideWeight="0.6440043" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5457627" sideWeight="0.4550321" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23615819" sideWeight="0.3559957" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25053534" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40903956" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33107343" sideWeight="0.49786097" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.49785867" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36045197" sideWeight="0.8763383" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.49785867" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15792291" sideWeight="0.89717513" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15792291" sideWeight="0.6325088" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.120903954" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03502825" sideWeight="0.6440043" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20342612" sideWeight="0.10282486" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15792291" sideWeight="0.36749116" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35141242" sideWeight="0.4550321" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19486082" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.120903954" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -8936,7 +8851,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/SplashActivity.java</url>
-          <line>74</line>
+          <line>68</line>
           <properties />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
@@ -9037,30 +8952,6 @@
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java</url>
-          <line>329</line>
-          <properties />
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java</url>
-          <line>325</line>
-          <properties />
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java</url>
-          <line>345</line>
-          <properties />
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java</url>
-          <line>348</line>
-          <properties />
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/BlackListActivity.java</url>
           <line>50</line>
           <properties />
@@ -9104,7 +8995,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/BlackListActivity.java</url>
-          <line>115</line>
+          <line>114</line>
           <properties />
           <option name="timeStamp" value="66" />
         </line-breakpoint>
@@ -9131,12 +9022,6 @@
           <line>27</line>
           <properties />
           <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java</url>
-          <line>105</line>
-          <properties />
-          <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/SealAppContext.java</url>
@@ -9175,207 +9060,23 @@
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java</url>
-          <line>94</line>
-          <properties />
-          <option name="timeStamp" value="81" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java</url>
-          <line>121</line>
-          <properties />
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java</url>
-          <line>214</line>
-          <properties />
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/SplashActivity.java</url>
-          <line>68</line>
+          <line>62</line>
           <properties />
           <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/SplashActivity.java</url>
-          <line>102</line>
+          <line>96</line>
           <properties />
           <option name="timeStamp" value="86" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="87" />
+      <option name="time" value="88" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/IMKit/src/main/libs/Rong_IMKit.jar!/io/rong/imageloader/core/ImageLoader.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="188" column="16" lean-forward="false" selection-start-line="188" selection-start-column="16" selection-end-line="188" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="354" column="42" lean-forward="true" selection-start-line="354" selection-start-column="42" selection-end-line="354" selection-end-column="42" />
-          <folding>
-            <marker date="1515414174723" expanded="false" signature="7897:7940" ph="&quot;头像更新成功&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/RegisterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="60" column="38" lean-forward="true" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/res/layout/activity_register.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="37" column="49" lean-forward="false" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IMKit/src/main/res/layout/rc_ext_extension_bar.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IMKit/src/main/res/layout/rc_ext_plugin_grid_view.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="36" lean-forward="true" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CallKit/build/intermediates/exploded-aar/zhanghai-android/IMKit/unspecified/res/layout/rc_item_information_notification_message.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="34" lean-forward="false" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seal/build/intermediates/exploded-aar/zhanghai-android/RedPacket/unspecified/res/values/values.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="81" column="63" lean-forward="true" selection-start-line="81" selection-start-column="63" selection-end-line="81" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6496">
-          <caret line="140" column="44" lean-forward="false" selection-start-line="140" selection-start-column="44" selection-end-line="140" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seal/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-396">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/ConversationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/IMKit/src/main/libs/Rong_IMKit.jar!/io/rong/imkit/plugin/ImagePlugin.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RedPacket/build/generated/source/r/debug/com/jrmf360/rylib/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="817" column="26" lean-forward="false" selection-start-line="817" selection-start-column="26" selection-end-line="817" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RedPacket/src/main/res/layout/_bribery_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/RedPacket/libs/jrmfry-1.5.0.jar!/com/jrmf360/rylib/rp/extend/JrmfRedPacketMessageProvider.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="152" column="65" lean-forward="true" selection-start-line="152" selection-start-column="65" selection-end-line="152" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contactcard/src/main/java/cn/rongcloud/contactcard/IContactCardSelectListProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CallKit/src/main/java/io/rong/callkit/RongCallModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="88" column="30" lean-forward="false" selection-start-line="88" selection-start-column="30" selection-end-line="88" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CallKit/src/main/java/io/rong/callkit/AudioPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CallKit/src/main/java/io/rong/callkit/RongVoIPIntent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CallKit/src/main/java/io/rong/callkit/VideoPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/IMLib/libs/Rong_IMLib.jar!/io/rong/imlib/model/Conversation.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="294" column="5" lean-forward="true" selection-start-line="294" selection-start-column="5" selection-end-line="294" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/UserDetailActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
@@ -9461,16 +9162,6 @@
         <state relative-caret-position="215">
           <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="125" column="72" lean-forward="false" selection-start-line="125" selection-start-column="49" selection-end-line="125" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -9569,18 +9260,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4708">
-          <caret line="216" column="65" lean-forward="false" selection-start-line="216" selection-start-column="65" selection-end-line="216" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4896#4897#0" expanded="true" />
-            <element signature="e#4967#4968#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/SealConst.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -9594,8 +9273,8 @@
         <state relative-caret-position="1562">
           <caret line="85" column="70" lean-forward="false" selection-start-line="85" selection-start-column="70" selection-end-line="85" selection-end-column="70" />
           <folding>
-            <element signature="e#2623#2624#0" expanded="true" />
-            <element signature="e#2664#2665#0" expanded="true" />
+            <element signature="e#2623#2624#0" expanded="false" />
+            <element signature="e#2664#2665#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -9619,6 +9298,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -9632,9 +9312,239 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/SplashActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="23" column="57" lean-forward="false" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
+        <state relative-caret-position="792">
+          <caret line="36" column="3" lean-forward="true" selection-start-line="36" selection-start-column="3" selection-end-line="36" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2021#2225#0" expanded="true" />
+            <element signature="e#2224#2225#0" expanded="true" />
+            <element signature="e#2882#3794#0" expanded="true" />
+            <element signature="e#3406#3692#0" expanded="true" />
+            <element signature="e#3691#3692#0" expanded="true" />
+            <element signature="e#3793#3794#0" expanded="true" />
+            <element signature="e#4369#4810#0" expanded="true" />
+            <element signature="e#4809#4810#0" expanded="true" />
+            <element signature="e#4852#5699#0" expanded="true" />
+            <element signature="e#5698#5699#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="127" column="30" lean-forward="true" selection-start-line="127" selection-start-column="30" selection-end-line="127" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/res/layout/seal_mine_fragment.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="43" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="120" column="17" lean-forward="false" selection-start-line="120" selection-start-column="17" selection-end-line="120" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/res/layout/layout_dialog_bottom.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/SDK/platforms/android-23/android.jar!/android/app/AlertDialog.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="214" column="35" lean-forward="false" selection-start-line="214" selection-start-column="35" selection-end-line="214" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/SDK/platforms/android-23/android.jar!/android/app/Activity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="601" column="22" lean-forward="false" selection-start-line="601" selection-start-column="22" selection-end-line="601" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/fragment/MineFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="140" column="62" lean-forward="false" selection-start-line="140" selection-start-column="62" selection-end-line="140" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/res/layout/activity_myaccount.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="39" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/server/widget/BottomMenuDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="139" column="34" lean-forward="false" selection-start-line="139" selection-start-column="34" selection-end-line="139" selection-end-column="34" />
+          <folding>
+            <element signature="e#1017#1018#0" expanded="false" />
+            <element signature="e#1073#1074#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/SDK/platforms/android-23/android.jar!/android/net/Uri.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="787">
+          <caret line="82" column="32" lean-forward="false" selection-start-line="82" selection-start-column="32" selection-end-line="82" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/SDK/platforms/android-23/android.jar!/android/content/ContextWrapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="58" column="27" lean-forward="false" selection-start-line="58" selection-start-column="27" selection-end-line="58" selection-end-column="27" />
+          <folding>
+            <element signature="e#1738#1739#0" expanded="true" />
+            <element signature="e#1789#1790#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/SDK/platforms/android-23/android.jar!/android/util/Base64.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/bean/UpLoadPictureBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="52" column="24" lean-forward="false" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/IMKit/src/main/libs/Rong_IMKit.jar!/io/rong/imageloader/core/ImageLoader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="5" column="33" lean-forward="true" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="199" column="38" lean-forward="false" selection-start-line="199" selection-start-column="38" selection-end-line="199" selection-end-column="38" />
+          <folding>
+            <element signature="e#8733#8734#0" expanded="false" />
+            <element signature="e#8763#8764#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/bean/UpLoadPictureReturnBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="79" column="22" lean-forward="false" selection-start-line="79" selection-start-column="22" selection-end-line="79" selection-end-column="22" />
+          <folding>
+            <element signature="e#1323#1324#0" expanded="false" />
+            <element signature="e#1365#1366#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/SDK/platforms/android-23/android.jar!/android/content/ContentValues.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/net/SocketClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="215" column="55" lean-forward="false" selection-start-line="215" selection-start-column="55" selection-end-line="215" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6063#6064#0" expanded="true" />
+            <element signature="e#6134#6135#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/server/utils/photo/PhotoUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="192" column="55" lean-forward="false" selection-start-line="192" selection-start-column="42" selection-end-line="192" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/BlackListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="93" column="39" lean-forward="false" selection-start-line="93" selection-start-column="39" selection-end-line="93" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seal/src/main/java/com/caishi/zhanghai/im/ui/activity/MyAccountActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="331" column="44" lean-forward="false" selection-start-line="331" selection-start-column="44" selection-end-line="331" selection-end-column="44" />
+          <folding>
+            <element signature="e#13574#14050#0" expanded="true" />
+            <element signature="e#14049#14050#0" expanded="true" />
+            <element signature="e#14091#15252#0" expanded="true" />
+            <element signature="e#15130#15173#0" expanded="true" />
+            <element signature="e#15251#15252#0" expanded="true" />
+            <marker date="1515684966835" expanded="false" signature="7970:8013" ph="&quot;头像更新成功&quot;" />
+          </folding>
         </state>
       </provider>
     </entry>

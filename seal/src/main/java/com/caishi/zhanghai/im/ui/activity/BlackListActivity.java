@@ -91,7 +91,6 @@ public class BlackListActivity extends BaseActivity {
         SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
             @Override
             public void returnJson(String json) {
-                Log.e("msg1111",json);
                 BlackReturnBean blackReturnBean = new Gson().fromJson(json,BlackReturnBean.class);
                 if(null != blackReturnBean){
                     Message message = new Message();
