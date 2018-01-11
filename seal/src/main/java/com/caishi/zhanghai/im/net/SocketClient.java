@@ -33,6 +33,7 @@ import static android.content.ContentValues.TAG;
  * Created by shihui on 2017/12/15.
  */
 
+
 public class SocketClient{
     public WeakReference<Socket> mSocket;
     public ReadThread mReadThread;
@@ -105,12 +106,10 @@ public class SocketClient{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else {
-            releaseLastSocket(mSocket);
-            BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
         }
 
     }
+
 
 
 
@@ -140,9 +139,6 @@ public class SocketClient{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else {
-            releaseLastSocket(mSocket);
-            BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
         }
 
     }
@@ -167,6 +163,7 @@ public class SocketClient{
             e.printStackTrace();
         }
     }
+
     class ReadThread extends Thread {
         private WeakReference<Socket> mWeakSocket;
         private boolean isStart = true;
@@ -178,6 +175,7 @@ public class SocketClient{
         public void release() {
             isStart = false;
             releaseLastSocket(mWeakSocket);
+
         }
 
         @Override
@@ -189,11 +187,12 @@ public class SocketClient{
                     InputStream is = socket.getInputStream();
                     byte[] buffer = new byte[1024 * 4];
                     int length = 0;
+                    Log.e("test","I am coming2");
                     while (!socket.isClosed() && !socket.isInputShutdown()
                             && isStart && ((length = is.read(buffer)) != -1)) {
+                        Log.e("test","I am coming");
                         if (length > 0) {
-                            String message = new String(Arrays.copyOf(buffer,
-                                    length)).trim();
+                            String message = new String(Arrays.copyOf(buffer,length)).trim();
                             Log.e(TAG, message);
                             if(!TextUtils.isEmpty(message)&&message.equals("{\"rid\":\"0\",\"m\":\"system\",\"k\":\"ping\",\"v\":\"\"}")){
                                 Log.e("test","收到心跳检测");
@@ -205,8 +204,17 @@ public class SocketClient{
                             }
                         }
                     }
+
+                    Log.e("test","进入重新连接1");
+                    releaseLastSocket(mSocket);
+                    BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
+                    Log.e("test","进入重新连接2");
+                    releaseLastSocket(mSocket);
+                    BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.BREAK_UP);
                 }
             }
 

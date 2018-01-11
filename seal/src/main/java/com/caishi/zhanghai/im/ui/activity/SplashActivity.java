@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,8 +19,6 @@ import android.widget.Toast;
 import com.caishi.zhanghai.im.R;
 import com.caishi.zhanghai.im.SealAppContext;
 import com.caishi.zhanghai.im.SealConst;
-import com.caishi.zhanghai.im.SealUserInfoManager;
-import com.caishi.zhanghai.im.bean.GetUserInfoReturnBean;
 import com.caishi.zhanghai.im.bean.LoginBean;
 import com.caishi.zhanghai.im.bean.LoginReturnBean;
 import com.caishi.zhanghai.im.net.AppParm;
@@ -29,13 +26,10 @@ import com.caishi.zhanghai.im.net.CallBackJson;
 import com.caishi.zhanghai.im.net.GetUrlUtil;
 import com.caishi.zhanghai.im.net.SocketClient;
 import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
-import com.caishi.zhanghai.im.server.utils.NLog;
 import com.caishi.zhanghai.im.utils.MD5;
 import com.google.gson.Gson;
 
 import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.UserInfo;
 
 /**
  * Created by AMing on 16/8/5.
@@ -70,6 +64,7 @@ public class SplashActivity extends Activity {
                 initSocketNet();
             }
         });
+
         initSocketNet();
 //        if (!TextUtils.isEmpty(cacheToken)) {
 //            RongIM.connect(cacheToken, SealAppContext.getInstance().getConnectCallback());
@@ -110,7 +105,10 @@ public class SplashActivity extends Activity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                goToLogin();
+                                if(isFrom){
+                                    goToLogin();
+                                }
+
                             }
                         }, 800);
                     }
