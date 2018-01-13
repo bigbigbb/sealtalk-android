@@ -5,7 +5,7 @@ package com.caishi.zhanghai.im.net;
  */
 
 public class AppParm {
-    public  static String IP ="";
-    public  static String PORT ="";
-
+    public static String IP ="";
+    public static String PORT ="";
+    public static final String HEADIMG = "http://zhanghai.looklaw.cn/upload/avatar/";
 }

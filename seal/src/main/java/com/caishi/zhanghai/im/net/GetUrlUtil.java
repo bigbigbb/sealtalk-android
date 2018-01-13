@@ -62,8 +62,47 @@ public class GetUrlUtil {
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
+    }
+
+    public static void requestPost() {
+        try {
+            String md5Value = MD5.getStringMD5("chat_Android_ZhanghaiAPP4AndroidPass");
+            String requestUrl = " http://www.looklaw.cn/chat/hello?iam=Android-" + md5Value;
+//            String requestUrl = baseUrl + tempParams.toString();
+            // 新建一个URL对象
+            URL url = new URL(requestUrl);
+            // 打开一个HttpURLConnection连接
+            HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+            // 设置连接主机超时时间
+            urlConn.setConnectTimeout(5 * 1000);
+            //设置从主机读取数据超时
+            urlConn.setReadTimeout(5 * 1000);
+            // 设置是否使用缓存  默认是true
+            urlConn.setUseCaches(true);
+            // 设置为Post请求
+            urlConn.setRequestMethod("POST");
+            //urlConn设置请求头信息
+            //设置请求中的媒体类型信息。
+            urlConn.setRequestProperty("Content-Type", "application/json");
+            //设置客户端与服务连接类型
+            urlConn.addRequestProperty("Connection", "Keep-Alive");
+            // 开始连接
+            urlConn.connect();
+            // 判断请求是否成功
+            if (urlConn.getResponseCode() == 200) {
+                // 获取返回的数据
+                String result = convertStreamToString(urlConn.getInputStream()).replace("/n", "");
+//                GetUrlBean getUrlBean = new Gson().fromJson(result, GetUrlBean.class);
 
 
+            } else {
+                Log.e(TAG, "Post方式请求失败");
+            }
+            // 关闭连接
+            urlConn.disconnect();
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
     }
 
     public static String convertStreamToString(InputStream is) {

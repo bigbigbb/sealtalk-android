@@ -71,6 +71,7 @@ dependencies {
     compile project(':CallKit')
     compile project(':RedPacket')
     compile(name: 'HMS-SDK-2.4.0.300', ext: 'aar')
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
 }
 apply plugin: 'com.google.gms.google-services'
 

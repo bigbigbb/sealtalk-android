@@ -25,10 +25,23 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.caishi.zhanghai.im.App;
+import com.caishi.zhanghai.im.R;
+import com.caishi.zhanghai.im.SealConst;
+import com.caishi.zhanghai.im.SealUserInfoManager;
+import com.caishi.zhanghai.im.bean.HttpUploadPictrueBean;
 import com.caishi.zhanghai.im.bean.UpLoadPictureBean;
 import com.caishi.zhanghai.im.bean.UpLoadPictureReturnBean;
-import com.caishi.zhanghai.im.net.CallBackJson;
-import com.caishi.zhanghai.im.net.SocketClient;
+import com.caishi.zhanghai.im.net.AppParm;
+import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
+import com.caishi.zhanghai.im.server.network.http.HttpException;
+import com.caishi.zhanghai.im.server.response.QiNiuTokenResponse;
+import com.caishi.zhanghai.im.server.response.SetPortraitResponse;
+import com.caishi.zhanghai.im.server.utils.NToast;
+import com.caishi.zhanghai.im.server.utils.photo.PhotoUtils;
+import com.caishi.zhanghai.im.server.widget.BottomMenuDialog;
+import com.caishi.zhanghai.im.server.widget.LoadDialog;
+import com.caishi.zhanghai.im.server.widget.SelectableRoundedImageView;
 import com.google.gson.Gson;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
@@ -39,24 +52,18 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-
-import com.caishi.zhanghai.im.App;
-import com.caishi.zhanghai.im.R;
-import com.caishi.zhanghai.im.SealConst;
-import com.caishi.zhanghai.im.SealUserInfoManager;
-import com.caishi.zhanghai.im.server.broadcast.BroadcastManager;
-import com.caishi.zhanghai.im.server.network.http.HttpException;
-import com.caishi.zhanghai.im.server.response.QiNiuTokenResponse;
-import com.caishi.zhanghai.im.server.response.SetPortraitResponse;
-import com.caishi.zhanghai.im.server.utils.NToast;
-import com.caishi.zhanghai.im.server.utils.photo.PhotoUtils;
-import com.caishi.zhanghai.im.server.widget.BottomMenuDialog;
-import com.caishi.zhanghai.im.server.widget.LoadDialog;
-import com.caishi.zhanghai.im.server.widget.SelectableRoundedImageView;
+import java.io.IOException;
 
 import io.rong.imageloader.core.ImageLoader;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.UserInfo;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class MyAccountActivity extends BaseActivity implements View.OnClickListener {
@@ -119,7 +126,6 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         try {
            // 读取uri所在的图片
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-            Log.e("[Android]", "成功获取图片");
             return bitmap;
         } catch (Exception e) {
             Log.e("[Android]", e.getMessage());
@@ -146,9 +152,36 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
                 if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
                     baseString = convertIconToString(getBitmapFromUri(uri));
                     selectUri = uri;
-                    LoadDialog.show(mContext);
+//                    LoadDialog.show(mContext);
 //                    request(GET_QI_NIU_TOKEN);
-                    uploadPicture();
+//                    uploadPicture();
+                    String account = sp.getString("account","");
+                    String token = sp.getString("loginToken","");
+                    OkHttpClient okHttpClient = new OkHttpClient();
+                    RequestBody body = new FormBody.Builder()
+                            .add("account",account)
+                            .add("token",token)
+                            .add("avatar",baseString)
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(AppParm.HEADIMG)
+                            .post(body)
+                            .build();
+                    Call call = okHttpClient.newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            Log.e("OkHttp","请求失败");
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            Log.e("OkHttp",response.body().string());
+//                            HttpUploadPictrueBean bean = new Gson().fromJson(response.body().string(), HttpUploadPictrueBean.class);
+//                            uploadPicture(bean);
+                        }
+                    });
                 }
             }
 
@@ -158,6 +191,51 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
             }
         });
     }
+
+    private void uploadPicture(HttpUploadPictrueBean bean) {
+        UpLoadPictureBean upLoadPictureBean = new UpLoadPictureBean();
+        upLoadPictureBean.setK("portrait");
+        upLoadPictureBean.setM("member");
+        upLoadPictureBean.setRid(String.valueOf(System.currentTimeMillis()));
+        UpLoadPictureBean.VBean vBean = new UpLoadPictureBean.VBean();
+        vBean.setImgbase64(bean.getData().getPortraitUri());
+        upLoadPictureBean.setV(vBean);
+        String msg = new Gson().toJson(upLoadPictureBean);
+        Log.e("[Android]", "上传的数据："+msg);
+//        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
+//            @Override
+//            public void returnJson(String json) {
+//                UpLoadPictureReturnBean upLoadPictureReturnBean = new Gson().fromJson(json, UpLoadPictureReturnBean.class);
+//                if (null != upLoadPictureReturnBean) {
+//                    Message message = new Message();
+//                    message.obj = upLoadPictureReturnBean;
+//                    handler.sendMessage(message);
+//                }
+//
+//            }
+//        });
+    }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            UpLoadPictureReturnBean upLoadPictureReturnBean = (UpLoadPictureReturnBean) msg.obj;
+            if (upLoadPictureReturnBean.getV().equals("ok")) {
+                String imageUrl = upLoadPictureReturnBean.getData().getPortraitUri();
+                editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, imageUrl);
+                editor.commit();
+                ImageLoader.getInstance().displayImage(imageUrl, mImageView, App.getOptions());
+                if (RongIM.getInstance() != null) {
+                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""), sp.getString(SealConst.SEALTALK_LOGIN_NAME, ""), Uri.parse(imageUrl)));
+                }
+                BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.CHANGEINFO);
+                NToast.shortToast(mContext, getString(R.string.portrait_update_success));
+
+                LoadDialog.dismiss(mContext);
+            }
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -314,56 +392,6 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
                 break;
         }
     }
-
-
-    private void uploadPicture() {
-        UpLoadPictureBean upLoadPictureBean = new UpLoadPictureBean();
-        upLoadPictureBean.setK("portrait");
-        upLoadPictureBean.setM("member");
-        upLoadPictureBean.setRid(String.valueOf(System.currentTimeMillis()));
-        UpLoadPictureBean.VBean vBean = new UpLoadPictureBean.VBean();
-        vBean.setImgbase64(baseString);
-        upLoadPictureBean.setV(vBean);
-        String msg = new Gson().toJson(upLoadPictureBean);
-        Log.e("[Android]", "上传的数据："+msg);
-        SocketClient.getInstance().sendMessage(msg, new CallBackJson() {
-            @Override
-            public void returnJson(String json) {
-                UpLoadPictureReturnBean upLoadPictureReturnBean = new Gson().fromJson(json, UpLoadPictureReturnBean.class);
-                if (null != upLoadPictureReturnBean) {
-                    Message message = new Message();
-                    message.obj = upLoadPictureReturnBean;
-                    handler.sendMessage(message);
-                }
-
-            }
-        });
-
-    }
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            UpLoadPictureReturnBean upLoadPictureReturnBean = (UpLoadPictureReturnBean) msg.obj;
-
-            Log.e("[Android]",upLoadPictureReturnBean.getV());
-
-            if (upLoadPictureReturnBean.getV().equals("ok")) {
-                String imageUrl = upLoadPictureReturnBean.getData().getPortraitUri();
-                editor.putString(SealConst.SEALTALK_LOGING_PORTRAIT, imageUrl);
-                editor.commit();
-                ImageLoader.getInstance().displayImage(imageUrl, mImageView, App.getOptions());
-                if (RongIM.getInstance() != null) {
-                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(sp.getString(SealConst.SEALTALK_LOGIN_ID, ""), sp.getString(SealConst.SEALTALK_LOGIN_NAME, ""), Uri.parse(imageUrl)));
-                }
-                BroadcastManager.getInstance(mContext).sendBroadcast(SealConst.CHANGEINFO);
-                NToast.shortToast(mContext, getString(R.string.portrait_update_success));
-
-                LoadDialog.dismiss(mContext);
-            }
-        }
-    };
 
     public void uploadImage(final String domain, String imageToken, Uri imagePath) {
         if (TextUtils.isEmpty(domain) && TextUtils.isEmpty(imageToken) && TextUtils.isEmpty(imagePath.toString())) {

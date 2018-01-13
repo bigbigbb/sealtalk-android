@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String connectResultId;
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
-    private String loginToken;
+    private String loginToken,account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -251,6 +251,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     if (loginReturnBean.getV().equals("ok")) {
                         if (null != loginReturnBean.getData()) {
                             loginToken = loginReturnBean.getData().getToken();
+                            Log.e("token",loginToken);
+                            account = loginReturnBean.getData().getAccount();
+                            Log.e("account",account);
                             if (!TextUtils.isEmpty(loginToken)) {
                                 RongIM.connect(loginToken, new RongIMClient.ConnectCallback() {
                                     @Override
@@ -497,6 +500,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void goToMain() {
         editor.putString("loginToken", loginToken);
+        editor.putString("account", account);
         editor.putString(SealConst.SEALTALK_LOGING_PHONE, phoneString);
         editor.putString(SealConst.SEALTALK_LOGING_PASSWORD, passwordString);
         editor.apply();

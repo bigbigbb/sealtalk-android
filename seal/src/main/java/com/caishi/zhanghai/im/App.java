@@ -10,9 +10,22 @@ import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.caishi.zhanghai.im.db.Friend;
+import com.caishi.zhanghai.im.message.TestMessage;
+import com.caishi.zhanghai.im.message.provider.ContactNotificationMessageProvider;
+import com.caishi.zhanghai.im.message.provider.TestMessageProvider;
 import com.caishi.zhanghai.im.net.AppParm;
 import com.caishi.zhanghai.im.net.GetUrlUtil;
 import com.caishi.zhanghai.im.net.SocketClient;
+import com.caishi.zhanghai.im.server.pinyin.CharacterParser;
+import com.caishi.zhanghai.im.server.utils.NLog;
+import com.caishi.zhanghai.im.server.utils.RongGenerate;
+import com.caishi.zhanghai.im.stetho.RongDatabaseDriver;
+import com.caishi.zhanghai.im.stetho.RongDatabaseFilesProvider;
+import com.caishi.zhanghai.im.stetho.RongDbFilesDumperPlugin;
+import com.caishi.zhanghai.im.ui.activity.UserDetailActivity;
+import com.caishi.zhanghai.im.utils.CrashHandler;
+import com.caishi.zhanghai.im.utils.SharedPreferencesContext;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.dumpapp.DumperPlugin;
 import com.facebook.stetho.inspector.database.DefaultDatabaseConnectionProvider;
@@ -25,18 +38,6 @@ import cn.rongcloud.contactcard.ContactCardExtensionModule;
 import cn.rongcloud.contactcard.IContactCardClickListener;
 import cn.rongcloud.contactcard.IContactCardInfoProvider;
 import cn.rongcloud.contactcard.message.ContactMessage;
-import com.caishi.zhanghai.im.db.Friend;
-import com.caishi.zhanghai.im.message.TestMessage;
-import com.caishi.zhanghai.im.message.provider.ContactNotificationMessageProvider;
-import com.caishi.zhanghai.im.message.provider.TestMessageProvider;
-import com.caishi.zhanghai.im.server.pinyin.CharacterParser;
-import com.caishi.zhanghai.im.server.utils.NLog;
-import com.caishi.zhanghai.im.server.utils.RongGenerate;
-import com.caishi.zhanghai.im.stetho.RongDatabaseDriver;
-import com.caishi.zhanghai.im.stetho.RongDatabaseFilesProvider;
-import com.caishi.zhanghai.im.stetho.RongDbFilesDumperPlugin;
-import com.caishi.zhanghai.im.ui.activity.UserDetailActivity;
-import com.caishi.zhanghai.im.utils.SharedPreferencesContext;
 import io.rong.imageloader.core.DisplayImageOptions;
 import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
 import io.rong.imkit.RongExtensionManager;
@@ -176,7 +177,7 @@ public class App extends MultiDexApplication {
 
         }
 
-
+        CrashHandler.getInstance().init(this);
 
     }
 
